@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AccionDelSistemaTest {
+public class Test06VictimaInvalida {
 
     @Test
     public void testSistemaRechazaVictimaMuerta() {
