@@ -29,4 +29,8 @@ public class Jugador {
     public void accionNocturna(Jugador jugador) {
         rol.accionNocturna(jugador);
     }
+
+    public boolean esMafia(){
+        return this.rol.esMafia();
+    }
 }

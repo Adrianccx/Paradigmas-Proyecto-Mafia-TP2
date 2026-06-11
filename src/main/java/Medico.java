@@ -6,4 +6,7 @@ public class Medico extends Rol {
     public void accionNocturna(Jugador jugador) {
         protegerA(jugador);
     }
+    public boolean esMafia() {
+        return false;
+    }
 }
