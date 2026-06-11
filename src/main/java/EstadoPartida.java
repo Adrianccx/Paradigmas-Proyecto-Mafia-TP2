@@ -19,6 +19,9 @@ public class EstadoPartida {
     }
 
     public void eliminarJugador(Jugador jugador) {
+        if (jugador.estaProtegido()) {
+            return;
+        }
         jugadoresVivos.remove(jugador);
         jugadoresEliminados.add(jugador);
     }
