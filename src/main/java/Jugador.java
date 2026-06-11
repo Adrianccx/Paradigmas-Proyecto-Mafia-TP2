@@ -26,7 +26,7 @@ public class Jugador {
         protegido = true;
     }
 
-    public void accionNocturna() {
-        rol.accionNocturna();
+    public void accionNocturna(Jugador jugador) {
+        rol.accionNocturna(jugador);
     }
 }
