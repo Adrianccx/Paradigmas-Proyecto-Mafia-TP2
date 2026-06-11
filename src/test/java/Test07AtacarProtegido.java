@@ -8,9 +8,9 @@ public class Test07AtacarProtegido {
         Jugador victima = new Jugador();
         Jugador medico = new Jugador();
         medico.setRol(new Medico());
-
         estado.añadirJugador(victima);
         estado.añadirJugador(medico);
+
         medico.accionNocturna(victima);
         estado.eliminarJugador(victima);
 
