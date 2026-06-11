@@ -7,10 +7,10 @@ public class FaseNocturna {
     }
 
     public void registrarVictimaMafia(Jugador victima) {
-        if (estado.getJugadoresEliminados().contains(victima)) {
+        if (!estado.estaVivo(victima)) {
             throw new IllegalArgumentException("El jugador seleccionado ya esta eliminado");
         }
-        if (victima.getRol() instanceof Mafioso) {
+        if (victima.esMafia()) {
             throw new IllegalArgumentException("La Mafia no puede atacarse a si misma");
         }
     }
