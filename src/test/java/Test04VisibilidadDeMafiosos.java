@@ -7,38 +7,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Test04VisibilidadDeMafiosos {
 
     @Test
-    public void testMafiososConocenASusComplicesAlInicio() {
-        // Arrange
-        Jugador mafioso1 = new Jugador();
-        mafioso1.setRol(new Mafioso());
-
-        Jugador mafioso2 = new Jugador();
-        mafioso2.setRol(new Mafioso());
+    public void testCiudadanoNoTieneComplicesDeLaMafia() {
+        //Arrange
+        Jugador mafioso = new Jugador();
+        mafioso.setRol(new Mafioso());
 
         Jugador ciudadano = new Jugador();
         ciudadano.setRol(new Ciudadano());
 
-        List<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(mafioso1);
-        jugadores.add(mafioso2);
-        jugadores.add(ciudadano);
-
-        Juego juego = new Juego();
+        EstadoPartida estado = new EstadoPartida(List.of(mafioso, ciudadano));
 
         //Act
-        juego.notificarComplices(jugadores);
+        List<Jugador> complicesDelCiudadano = estado.complicesDe(ciudadano);
 
         //Assert
-        Mafioso rolMafioso1 = (Mafioso) mafioso1.getRol();
-
-        assertNotNull(rolMafioso1.getComplices(), "La lista de complices no deberia ser nula");
-        assertEquals(1, rolMafioso1.getComplices().size(), "Deberia tener exactamente 1 complice");
-        assertTrue(rolMafioso1.getComplices().contains(mafioso2), "El complice deberia ser el mafioso2");
+        assertTrue(complicesDelCiudadano.isEmpty());
     }
 
     @Test
-    public void testMafiosoYPadrinoSeReconocenComoComplices() {
-        // Arrange
+    public void testMafiosoConoceAlPadrinoComoComplice() {
+        //Arrange
         Jugador mafioso = new Jugador();
         mafioso.setRol(new Mafioso());
 
@@ -48,22 +36,38 @@ public class Test04VisibilidadDeMafiosos {
         Jugador ciudadano = new Jugador();
         ciudadano.setRol(new Ciudadano());
 
-        List<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(mafioso);
-        jugadores.add(padrino);
-        jugadores.add(ciudadano);
-
-        Juego juego = new Juego();
+        EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
 
         //Act
-        juego.notificarComplices(jugadores);
-
-        Mafioso rolMafioso = (Mafioso) mafioso.getRol();
-        Padrino rolPadrino = (Padrino) padrino.getRol();
+        List<Jugador> complicesDelMafioso = estado.complicesDe(mafioso);
 
         //Assert
-        assertTrue(rolMafioso.getComplices().contains(padrino), "Padrino es complice de Mafioso");
-        assertTrue(rolPadrino.getComplices().contains(mafioso) ,"Mafioso es complice de padrino");
-
+        assertTrue(complicesDelMafioso.contains(padrino));
+        assertFalse(complicesDelMafioso.contains(ciudadano));
+        assertFalse(complicesDelMafioso.contains(mafioso));
     }
+
+    @Test
+    public void testPadrinoConoceAlMafiosoComoComplice() {
+        //Arrange
+        Jugador mafioso = new Jugador();
+        mafioso.setRol(new Mafioso());
+
+        Jugador padrino = new Jugador();
+        padrino.setRol(new Padrino());
+
+        Jugador ciudadano = new Jugador();
+        ciudadano.setRol(new Ciudadano());
+
+        EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
+
+        //Act
+        List<Jugador> complicesDelPadrino = estado.complicesDe(padrino);
+
+        //Assert
+        assertTrue(complicesDelPadrino.contains(mafioso));
+        assertFalse(complicesDelPadrino.contains(ciudadano));
+        assertFalse(complicesDelPadrino.contains(padrino));
+    }
+
 }
