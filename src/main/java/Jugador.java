@@ -1,9 +1,14 @@
 public class Jugador {
 
     private Rol rol;
+    private boolean protegido;
 
     public Rol getRol() {
         return this.rol;
+    }
+
+    public boolean estaProtegido() {
+        return this.protegido;
     }
 
     public void setRol(Rol rol) {
@@ -14,7 +19,10 @@ public class Jugador {
         if (this == solicitante) {
             return this.rol;
         }
-
         return null;
+    }
+
+    public void proteger() {
+        protegido = true;
     }
 }
