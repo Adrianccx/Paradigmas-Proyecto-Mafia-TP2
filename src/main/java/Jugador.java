@@ -25,4 +25,8 @@ public class Jugador {
     public void proteger() {
         protegido = true;
     }
+
+    public void accionNocturna() {
+        rol.accionNocturna();
+    }
 }
