@@ -10,25 +10,29 @@ public class Test02MazoAleatorio {
 
     @Test
 
-    public void testRepartirRolesDebeAsignarUnaCartaAleatoriaACadaJugador(){
+    public void testRepartirRolesDebeAsignarUnaCartaACadaJugador(){
         //Arrange
         FabricaMazo fabrica = new FabricaMazoEstandar();
         Mazo mazo = new Mazo();
 
         mazo.incializarMazo(fabrica, 6);
 
-        List<Jugador> Jugadores = new ArrayList<>();
+        List<Jugador> jugadores = new ArrayList<>();
         for (int i=0; i<6; i++){
-            Jugadores.add(new Jugador());
+            jugadores.add(new Jugador());
         }
 
         //Act
-        mazo.repartir(Jugadores);
+        mazo.repartir(jugadores);
 
         //Assert
-        for(Jugador Jugador: Jugadores){
-            assertNotNull(Jugador.getRol());
-        }
+        int jugadoresConRol = 0;
 
+        for(Jugador jugador : jugadores){
+            if(jugador.getRol() != null){
+                jugadoresConRol++;
+            }
+        }
+        assertEquals(6, jugadoresConRol);
     }
 }
