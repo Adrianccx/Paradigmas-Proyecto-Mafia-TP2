@@ -14,5 +14,7 @@ public class EstadoPartida {
         return this.jugadoresEliminados;
     }
 
-    public void añadirJugador(Jugador jugador) { jugadoresVivos.add(jugador); }
+    public void añadirJugador(Jugador jugador) {
+        jugadoresVivos.add(jugador);
+    }
 }
