@@ -13,4 +13,6 @@ public class EstadoPartida {
     public Collection<Jugador> getJugadoresEliminados() {
         return this.jugadoresEliminados;
     }
+
+    public void añadirJugador(Jugador jugador) { jugadoresVivos.add(jugador); }
 }
