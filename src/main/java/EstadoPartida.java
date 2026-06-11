@@ -1,5 +1,7 @@
 import java.util.Collection;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class EstadoPartida {
 
@@ -28,5 +30,19 @@ public class EstadoPartida {
 
     public boolean estaVivo(Jugador jugador) {
         return jugadoresVivos.contains(jugador);
+    }
+
+    public List<Jugador> complicesDe(Jugador jugador){
+        if(!jugador.esMafia()){
+            return Collections.emptyList();
+        }
+        List<Jugador> complices = new ArrayList<>();
+
+        for (Jugador posibleComplice : jugadoresVivos){
+            if(posibleComplice != jugador && posibleComplice.esMafia()){
+                complices.add(posibleComplice);
+            }
+        }
+        return Collections.unmodifiableList(complices);
     }
 }
