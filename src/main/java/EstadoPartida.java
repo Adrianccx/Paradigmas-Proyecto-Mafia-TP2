@@ -8,6 +8,13 @@ public class EstadoPartida {
     private Collection<Jugador> jugadoresVivos = new ArrayList<>();
     private Collection<Jugador> jugadoresEliminados = new ArrayList<>();
 
+    public EstadoPartida(){};
+
+    public EstadoPartida(List<Jugador> jugadores){
+        this.jugadoresVivos = new ArrayList<>(jugadores);
+        this.jugadoresEliminados = new ArrayList<>();
+    }
+
     public Collection<Jugador> getJugadoresVivos() {
         return this.jugadoresVivos;
     }
