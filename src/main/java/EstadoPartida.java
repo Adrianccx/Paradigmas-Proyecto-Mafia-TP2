@@ -17,4 +17,9 @@ public class EstadoPartida {
     public void añadirJugador(Jugador jugador) {
         jugadoresVivos.add(jugador);
     }
+
+    public void eliminarJugador(Jugador jugador) {
+        jugadoresVivos.remove(jugador);
+        jugadoresEliminados.add(jugador);
+    }
 }
