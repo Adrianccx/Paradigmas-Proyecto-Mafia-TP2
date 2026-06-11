@@ -11,4 +11,14 @@ public class Mafioso extends Rol {
     public void setComplices(List<Jugador> complices) {
         this.complices = complices;
     }
+
+    @Override
+    public int prioridadNocturna(){
+        return 1;
+    }
+
+    @Override
+    public void accionNocturna(Jugador jugador, FaseNocturna faseNocturna){
+        faseNocturna.accionDeMafia(jugador);
+    }
 }
