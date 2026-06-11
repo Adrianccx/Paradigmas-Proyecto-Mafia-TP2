@@ -25,4 +25,8 @@ public class EstadoPartida {
         jugadoresVivos.remove(jugador);
         jugadoresEliminados.add(jugador);
     }
+
+    public boolean estaVivo(Jugador jugador) {
+        return jugadoresVivos.contains(jugador);
+    }
 }
