@@ -5,6 +5,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Test04VisibilidadDeMafiosos {
+
     @Test
     public void testMafiososConocenASusComplicesAlInicio() {
         // Arrange
@@ -33,5 +34,36 @@ public class Test04VisibilidadDeMafiosos {
         assertNotNull(rolMafioso1.getComplices(), "La lista de complices no deberia ser nula");
         assertEquals(1, rolMafioso1.getComplices().size(), "Deberia tener exactamente 1 complice");
         assertTrue(rolMafioso1.getComplices().contains(mafioso2), "El complice deberia ser el mafioso2");
+    }
+
+    @Test
+    public void testMafiosoYPadrinoSeReconocenComoComplices() {
+        // Arrange
+        Jugador mafioso = new Jugador();
+        mafioso.setRol(new Mafioso());
+
+        Jugador padrino = new Jugador();
+        padrino.setRol(new Padrino());
+
+        Jugador ciudadano = new Jugador();
+        ciudadano.setRol(new Ciudadano());
+
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(mafioso);
+        jugadores.add(padrino);
+        jugadores.add(ciudadano);
+
+        Juego juego = new Juego();
+
+        //Act
+        juego.notificarComplices(jugadores);
+
+        Mafioso rolMafioso = (Mafioso) mafioso.getRol();
+        Padrino rolPadrino = (Padrino) padrino.getRol();
+
+        //Assert
+        assertTrue(rolMafioso.getComplices().contains(padrino), "Padrino es complice de Mafioso");
+        assertTrue(rolPadrino.getComplices().contains(mafioso) ,"Mafioso es complice de padrino");
+
     }
 }
