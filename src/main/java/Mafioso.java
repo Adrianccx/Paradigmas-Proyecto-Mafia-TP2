@@ -11,4 +11,8 @@ public class Mafioso extends Rol {
     public void setComplices(List<Jugador> complices) {
         this.complices = complices;
     }
+
+    public void accionNocturna(Jugador jugador) {
+        return;
+    }
 }
