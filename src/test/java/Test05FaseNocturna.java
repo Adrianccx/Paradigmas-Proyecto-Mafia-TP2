@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Test05FaseNocturna {
@@ -9,8 +12,7 @@ public class Test05FaseNocturna {
         Jugador ciudadanoVivo = new Jugador();
         ciudadanoVivo.setRol(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida();
-        estado.getJugadoresVivos().add(ciudadanoVivo);
+        EstadoPartida estado = new EstadoPartida(List.of(ciudadanoVivo));
 
         FaseNocturna faseNocturna = new FaseNocturna(estado);
 

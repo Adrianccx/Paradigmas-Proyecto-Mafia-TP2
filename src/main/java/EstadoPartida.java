@@ -16,11 +16,11 @@ public class EstadoPartida {
     }
 
     public Collection<Jugador> getJugadoresVivos() {
-        return this.jugadoresVivos;
+        return Collections.unmodifiableCollection(jugadoresVivos);
     }
 
     public Collection<Jugador> getJugadoresEliminados() {
-        return this.jugadoresEliminados;
+        return Collections.unmodifiableCollection(jugadoresEliminados);
     }
 
     public void añadirJugador(Jugador jugador) {

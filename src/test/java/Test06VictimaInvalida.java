@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Test06VictimaInvalida {
@@ -9,8 +12,8 @@ public class Test06VictimaInvalida {
         Jugador ciudadanoMuerto = new Jugador();
         ciudadanoMuerto.setRol(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida();
-        estado.getJugadoresEliminados().add(ciudadanoMuerto);
+        EstadoPartida estado = new EstadoPartida(List.of(ciudadanoMuerto));
+        estado.eliminarJugador(ciudadanoMuerto);
 
         FaseNocturna faseNocturna = new FaseNocturna(estado);
 
@@ -29,8 +32,7 @@ public class Test06VictimaInvalida {
         Jugador compañeroMafioso = new Jugador();
         compañeroMafioso.setRol(new Mafioso());
 
-        EstadoPartida estado = new EstadoPartida();
-        estado.getJugadoresVivos().add(compañeroMafioso);
+        EstadoPartida estado = new EstadoPartida(List.of(compañeroMafioso));
 
         FaseNocturna faseNocturna = new FaseNocturna(estado);
 
