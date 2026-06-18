@@ -5,7 +5,6 @@ public class Jugador {
 
     private Rol rol;
     private boolean protegido;
-    private Jugador ultimoInvestigado;
     private boolean vivo = true;
 
     public Jugador(Rol rol){
@@ -46,20 +45,22 @@ public class Jugador {
         rol.accionNocturna(jugador);
     }
 
-    private String resultadoDeInvestigacion(){
+    public String recibirInvestigacion(){
+        if(!this.vivo){
+            throw new IllegalStateException(
+                    "Un se puede investigar a un jugador eliminado"
+            );
+        }
         return this.rol.resultadoDeInvestigacion();
     }
 
     public String investigar(Jugador objetivo) {
-        if (this.ultimoInvestigado == objetivo) {
+        if (!this.vivo) {
             throw new IllegalStateException(
-                    "No podés investigar al mismo jugador dos noches consecutivas."
+                    "Un jugador eliminado no puede realizar acciones."
             );
         }
-
-        this.ultimoInvestigado = objetivo;
-
-        return objetivo.resultadoDeInvestigacion();
+        return this.rol.investigar(objetivo);
     }
 
     public void recibirComplices(List<Jugador> complices){

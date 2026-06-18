@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Test09DeyectiveRecibeResultadoCorrectoAlInvestigarAMafioso {
     @Test
@@ -28,5 +29,17 @@ public class Test09DeyectiveRecibeResultadoCorrectoAlInvestigarAMafioso {
 
         // Assert
         assertEquals("Ciudadano", resultado);
+    }
+
+    @Test
+    public void Test09CiudadanoNoPuedeInvestigar(){
+
+        Jugador ciudadano = new Jugador(new Ciudadano());
+        Jugador objetivo = new Jugador(new Mafioso());
+
+        assertThrows(
+            IllegalStateException.class,
+                    () -> ciudadano.investigar(objetivo)
+        );
     }
 }

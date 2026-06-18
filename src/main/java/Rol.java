@@ -25,5 +25,9 @@ public abstract class Rol {
         return "Ciudadano";
     }
     public abstract boolean esMafia();
+
+    public String investigar(Jugador objetivo){
+        throw new IllegalStateException("Este rol no puede investigar");
+    }
 }
 
