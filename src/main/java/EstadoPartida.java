@@ -43,20 +43,6 @@ public class EstadoPartida {
         return jugadoresVivos.contains(jugador);
     }
 
-    public List<Jugador> complicesDe(Jugador jugador){
-        if(!jugador.esMafia()){
-            return Collections.emptyList();
-        }
-        List<Jugador> complices = new ArrayList<>();
-
-        for (Jugador posibleComplice : jugadoresVivos){
-            if(posibleComplice != jugador && posibleComplice.esMafia()){
-                complices.add(posibleComplice);
-            }
-        }
-        return Collections.unmodifiableList(complices);
-    }
-
     public void setUsarBallotage(boolean usarBallotage) {
         this.usarBallotage = usarBallotage;
     }

@@ -10,56 +10,51 @@ public class Test04VisibilidadDeMafiosos {
     public void testCiudadanoNoTieneComplicesDeLaMafia() {
         //Arrange
         Jugador mafioso = new Jugador(new Mafioso());
-
         Jugador ciudadano = new Jugador(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida(List.of(mafioso, ciudadano));
+        Juego juego = new Juego();
 
         //Act
-        List<Jugador> complicesDelCiudadano = estado.complicesDe(ciudadano);
+        juego.notificarComplices(List.of(mafioso, ciudadano));
 
         //Assert
-        assertTrue(complicesDelCiudadano.isEmpty());
+        assertTrue(ciudadano.obtenerComplices().isEmpty());
     }
 
     @Test
     public void testMafiosoConoceAlPadrinoComoComplice() {
         //Arrange
         Jugador mafioso = new Jugador(new Mafioso());
-
         Jugador padrino = new Jugador(new Padrino());
-
         Jugador ciudadano = new Jugador(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
+        Juego juego = new Juego();
 
         //Act
-        List<Jugador> complicesDelMafioso = estado.complicesDe(mafioso);
+        juego.notificarComplices(List.of(mafioso, padrino, ciudadano));
 
         //Assert
-        assertTrue(complicesDelMafioso.contains(padrino));
-        assertFalse(complicesDelMafioso.contains(ciudadano));
-        assertFalse(complicesDelMafioso.contains(mafioso));
+        assertTrue(mafioso.obtenerComplices().contains(padrino));
+        assertFalse(mafioso.obtenerComplices().contains(ciudadano));
+        assertFalse(mafioso.obtenerComplices().contains(mafioso));
     }
 
     @Test
     public void testPadrinoConoceAlMafiosoComoComplice() {
         //Arrange
         Jugador mafioso = new Jugador(new Mafioso());
-
         Jugador padrino = new Jugador(new Padrino());
-
         Jugador ciudadano = new Jugador(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
+        Juego juego = new Juego();
 
         //Act
-        List<Jugador> complicesDelPadrino = estado.complicesDe(padrino);
+        juego.notificarComplices(List.of(mafioso,padrino, ciudadano));
 
         //Assert
-        assertTrue(complicesDelPadrino.contains(mafioso));
-        assertFalse(complicesDelPadrino.contains(ciudadano));
-        assertFalse(complicesDelPadrino.contains(padrino));
+        assertTrue(padrino.obtenerComplices().contains(mafioso));
+        assertFalse(padrino.obtenerComplices().contains(ciudadano));
+        assertFalse(padrino.obtenerComplices().contains(padrino));
     }
 
 }
