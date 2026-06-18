@@ -13,7 +13,7 @@ public class Mazo {
 
     public List<Rol> repartir(){
         List<Rol> cartasRepartidas = new ArrayList<>(this.roles);
-        Collections.shuffle(this.roles);
+        Collections.shuffle(cartasRepartidas);
 
         return Collections.unmodifiableList(cartasRepartidas);
     }
