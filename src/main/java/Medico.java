@@ -1,14 +1,11 @@
 public class Medico extends Rol {
-
     private Jugador ultimoProtegido;
 
     public void protegerA(Jugador jugador) {
         if (this.ultimoProtegido == jugador) {
             throw new IllegalStateException("No podés proteger al mismo jugador dos noches consecutivas.");
         }
-
         this.ultimoProtegido = jugador;
-
         jugador.proteger();
     }
 
@@ -18,7 +15,7 @@ public class Medico extends Rol {
     }
 
     @Override
-    public boolean esMafia() {
-        return false;
+    public Bando getBandoReal() {
+        return Bando.CIUDADANO;
     }
 }

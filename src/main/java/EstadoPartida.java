@@ -7,7 +7,7 @@ public class EstadoPartida {
 
     private Collection<Jugador> jugadoresVivos = new ArrayList<>();
     private Collection<Jugador> jugadoresEliminados = new ArrayList<>();
-    private boolean usarBallotage = false; // Parámetro de configuración
+    private boolean usarBallotage = false; 
 
     public EstadoPartida(){};
 
@@ -28,30 +28,21 @@ public class EstadoPartida {
         jugadoresVivos.add(jugador);
     }
 
+    // MODIFICACIÓN: Ahora es una eliminación directa. El control de si se puede 
+    // defender o no pasa a ser responsabilidad de la Fase Nocturna (reglas de la noche).
     public void eliminarJugador(Jugador jugador) {
-        if (jugador.estaProtegido()) {
-            return;
-        }
         jugadoresVivos.remove(jugador);
         jugadoresEliminados.add(jugador);
+        jugador.eliminar(); // Le avisamos al jugador internamente que murió
     }
 
     public boolean estaVivo(Jugador jugador) {
         return jugadoresVivos.contains(jugador);
     }
 
-    public List<Jugador> complicesDe(Jugador jugador){
-        if(!jugador.esMafia()){
-            return Collections.emptyList();
-        }
-        List<Jugador> complices = new ArrayList<>();
-
-        for (Jugador posibleComplice : jugadoresVivos){
-            if(posibleComplice != jugador && posibleComplice.esMafia()){
-                complices.add(posibleComplice);
-            }
-        }
-        return Collections.unmodifiableList(complices);
+    public List<Jugador> complicesDe(Jugador jugador) {
+      // El jugador y su rol saben qué hacer.
+    return jugador.obtenerComplices(this.jugadoresVivos); 
     }
 
     public void setUsarBallotage(boolean usarBallotage) {
@@ -60,5 +51,23 @@ public class EstadoPartida {
 
     public boolean isUsarBallotage() {
         return this.usarBallotage;
+    }
+
+    // método rápido para que el Juego sepa si alguien ya ganó
+    public Bando verificarGanador() {
+        int mafiososVivos = 0;
+        int ciudadanosVivos = 0;
+
+        for (Jugador j : jugadoresVivos) {
+            if (j.getBandoReal() == Bando.MAFIA) {
+                mafiososVivos++;
+            } else {
+                ciudadanosVivos++;
+            }
+        }
+
+        if (mafiososVivos == 0) return Bando.CIUDADANO;
+        if (mafiososVivos >= ciudadanosVivos) return Bando.MAFIA;
+        return null; // Sigue la partida
     }
 }

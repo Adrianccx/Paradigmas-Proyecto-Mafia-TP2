@@ -6,7 +6,6 @@ import java.util.Map;
 public class FaseDiurna implements Fase {
 
     private EstadoPartida estado;
-
     private List<Jugador> jugadoresNominados = new ArrayList<>();
     private Map<Jugador, Integer> urnaDeVotos = new HashMap<>();
     private boolean enBallotage = false;
@@ -20,6 +19,7 @@ public class FaseDiurna implements Fase {
 
     @Override
     public void ejecutarFase() {
+        
     }
 
     public void nominar(Jugador objetivo) {
@@ -56,7 +56,7 @@ public class FaseDiurna implements Fase {
 
         if (empatados.size() == 1) {
             if (estado != null) {
-                estado.eliminarJugador(empatados.get(0));
+                estado.eliminarJugador(empatados.get(0)); // Linchamiento garantizado
             } else {
                 empatados.get(0).eliminar();
             }

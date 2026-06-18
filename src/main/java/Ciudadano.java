@@ -1,9 +1,7 @@
-public class Ciudadano extends Rol{
-    public void accionNocturna(Jugador jugador) {
-        return;
-    }
-
-    public boolean esMafia() {
-        return false;
+public class Ciudadano extends Rol {
+    @Override
+    public Bando getBandoReal() {
+        return Bando.CIUDADANO;
     }
 }
+
