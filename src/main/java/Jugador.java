@@ -20,10 +20,6 @@ public class Jugador {
         this.vivo = false;
     }
 
-    public Rol getRol() {
-        return this.rol;
-    }
-
     public boolean esMafia() {
         return this.rol.esMafia();
     }
@@ -50,23 +46,20 @@ public class Jugador {
         rol.accionNocturna(jugador);
     }
 
+    private String resultadoDeInvestigacion(){
+        return this.rol.resultadoDeInvestigacion();
+    }
 
     public String investigar(Jugador objetivo) {
         if (this.ultimoInvestigado == objetivo) {
-            throw new IllegalStateException("No podés investigar al mismo jugador dos noches consecutivas.");
+            throw new IllegalStateException(
+                    "No podés investigar al mismo jugador dos noches consecutivas."
+            );
         }
 
         this.ultimoInvestigado = objetivo;
 
-        if (objetivo.getRol() instanceof Padrino) {
-            return "Ciudadano";
-        }
-        else if (objetivo.esMafia()) {
-            return "Mafia";
-        }
-        else {
-            return "Ciudadano";
-        }
+        return objetivo.resultadoDeInvestigacion();
     }
 
     public void recibirComplices(List<Jugador> complices){

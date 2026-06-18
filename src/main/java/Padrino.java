@@ -19,4 +19,9 @@ public class Padrino extends Rol {
     public List<Jugador> obtenerComplices() {
         return Collections.unmodifiableList(this.complices);
     }
+
+    @Override
+    public String resultadoDeInvestigacion(){
+        return "Ciudadano";
+    }
 }

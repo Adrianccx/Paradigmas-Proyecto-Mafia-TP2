@@ -18,6 +18,12 @@ public abstract class Rol {
         return Collections.emptyList();
     }
 
+    public String resultadoDeInvestigacion(){
+        if(esMafia()){
+            return "Mafia";
+        }
+        return "Ciudadano";
+    }
     public abstract boolean esMafia();
 }
 
