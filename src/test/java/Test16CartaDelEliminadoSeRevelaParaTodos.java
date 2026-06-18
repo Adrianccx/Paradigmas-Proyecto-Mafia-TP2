@@ -7,11 +7,10 @@ public class Test16CartaDelEliminadoSeRevelaParaTodos {
     @Test
     public void testRolSeRevelaAlSerEliminado() {
         // Arrange
-        Jugador victima = new Jugador();
         Rol rolVictima = new Ciudadano();
-        victima.setRol(rolVictima);
+        Jugador victima = new Jugador(rolVictima);
 
-        Jugador otroJugador = new Jugador();
+        Jugador otroJugador = new Jugador(new Ciudadano());
 
         // Act1
         Rol rolOculto = victima.revelarRol(otroJugador);

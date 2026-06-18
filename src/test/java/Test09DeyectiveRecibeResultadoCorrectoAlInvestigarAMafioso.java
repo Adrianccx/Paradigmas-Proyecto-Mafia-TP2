@@ -5,11 +5,9 @@ public class Test09DeyectiveRecibeResultadoCorrectoAlInvestigarAMafioso {
     @Test
     public void testDetectiveInvestigaMafiosoYObtieneResultadoMafia() {
         // Arrange
-        Jugador detective = new Jugador();
-        detective.setRol(new Detective());
+        Jugador detective = new Jugador(new Detective());
 
-        Jugador mafioso = new Jugador();
-        mafioso.setRol(new Mafioso());
+        Jugador mafioso = new Jugador(new Mafioso());
 
         // Act
         String resultado = detective.investigar(mafioso);
@@ -21,11 +19,9 @@ public class Test09DeyectiveRecibeResultadoCorrectoAlInvestigarAMafioso {
     @Test
     public void testDetectiveInvestigaCiudadanoYObtieneResultadoCiudadano() {
         // Arrange
-        Jugador detective = new Jugador();
-        detective.setRol(new Detective());
+        Jugador detective = new Jugador(new Detective());
 
-        Jugador ciudadano = new Jugador();
-        ciudadano.setRol(new Ciudadano());
+        Jugador ciudadano = new Jugador(new Ciudadano());
 
         // Act
         String resultado = detective.investigar(ciudadano);

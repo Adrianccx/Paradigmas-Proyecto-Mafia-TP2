@@ -8,11 +8,9 @@ public class Test03VisibilidadJugador {
 
     public void testUnJugadorSoloPuedaVerSuPropioRolDuranteLaPartida(){
          //Arrange
-        Jugador jugador1 = new Jugador();
-        jugador1.setRol(new Ciudadano());
+        Jugador jugador1 = new Jugador(new Ciudadano());
 
-        Jugador jugador2 = new Jugador();
-        jugador2.setRol(new Mafioso());
+        Jugador jugador2 = new Jugador(new Mafioso());
 
         //Act y Assert 1:Jugador 1 intenta ver su propio rol
         Rol rolVistoPorSiMismo = jugador1.revelarRol(jugador1);

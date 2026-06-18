@@ -8,11 +8,9 @@ public class Test17JugadorEliminadoNoPuedeRealizarAccion {
     @Test
     public void testJugadorEliminadoNoPuedeRealizarAcciones() {
         // Arrange
-        Jugador medico = new Jugador();
-        medico.setRol(new Medico());
+        Jugador medico = new Jugador(new Medico());
 
-        Jugador paciente = new Jugador();
-        paciente.setRol(new Ciudadano());
+        Jugador paciente = new Jugador(new Ciudadano());
         medico.eliminar();
 
         // Act y Assert

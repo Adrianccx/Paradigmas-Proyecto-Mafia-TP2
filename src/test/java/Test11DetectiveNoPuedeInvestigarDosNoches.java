@@ -6,11 +6,9 @@ public class Test11DetectiveNoPuedeInvestigarDosNoches {
     @Test
     public void testDetectiveNoPuedeInvestigarAlMismoJugadorDosNochesConsecutivas() {
         // Arrange
-        Jugador detective = new Jugador();
-        detective.setRol(new Detective());
+        Jugador detective = new Jugador(new Detective());
 
-        Jugador sospechoso = new Jugador();
-        sospechoso.setRol(new Ciudadano());
+        Jugador sospechoso = new Jugador(new Ciudadano());
 
         // Act
         detective.investigar(sospechoso);

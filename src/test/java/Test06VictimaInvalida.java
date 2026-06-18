@@ -9,8 +9,7 @@ public class Test06VictimaInvalida {
     @Test
     public void testSistemaRechazaVictimaMuerta() {
         //Arrange
-        Jugador ciudadanoMuerto = new Jugador();
-        ciudadanoMuerto.setRol(new Ciudadano());
+        Jugador ciudadanoMuerto = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(List.of(ciudadanoMuerto));
         estado.eliminarJugador(ciudadanoMuerto);
@@ -29,8 +28,7 @@ public class Test06VictimaInvalida {
     @Test
     public void testSistemaRechazaVictimaMafiosa() {
         //Arrange
-        Jugador compañeroMafioso = new Jugador();
-        compañeroMafioso.setRol(new Mafioso());
+        Jugador compañeroMafioso = new Jugador(new Mafioso());
 
         EstadoPartida estado = new EstadoPartida(List.of(compañeroMafioso));
 

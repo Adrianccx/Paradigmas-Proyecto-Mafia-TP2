@@ -8,8 +8,8 @@ public class Test15Ballotage {
     @Test
     public void testEmpateSinEliminacionNadieMuere() {
         // Arrange - Ahora todo pasa a través del EstadoPartida
-        Jugador j1 = new Jugador();
-        Jugador j2 = new Jugador();
+        Jugador j1 = new Jugador(new Ciudadano());
+        Jugador j2 = new Jugador(new Ciudadano());
         EstadoPartida estado = new EstadoPartida(Arrays.asList(j1, j2));
 
         // Configuramos que NO hay ballotage (Sin Eliminación)
@@ -35,9 +35,9 @@ public class Test15Ballotage {
     @Test
     public void testEmpateConBallotageFuerzaSegundaVuelta() {
         // Arrange
-        Jugador j1 = new Jugador();
-        Jugador j2 = new Jugador();
-        Jugador j3 = new Jugador();
+        Jugador j1 = new Jugador(new Ciudadano());
+        Jugador j2 = new Jugador(new Ciudadano());
+        Jugador j3 = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(Arrays.asList(j1, j2, j3));
         estado.setUsarBallotage(true); // Activamos el ballotage

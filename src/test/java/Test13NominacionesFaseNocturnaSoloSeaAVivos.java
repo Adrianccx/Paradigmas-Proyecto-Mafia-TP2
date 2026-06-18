@@ -6,8 +6,7 @@ public class Test13NominacionesFaseNocturnaSoloSeaAVivos {
     @Test
     public void testNominacionFaseDiurnaRechazaJugadoresEliminados() {
         // Arrange
-        Jugador jugadorMuerto = new Jugador();
-        jugadorMuerto.setRol(new Ciudadano());
+        Jugador jugadorMuerto = new Jugador(new Ciudadano());
 
         // Lo matamos antes de que empiece el dia
         jugadorMuerto.eliminar();

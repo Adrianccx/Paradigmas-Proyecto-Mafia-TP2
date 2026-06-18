@@ -6,9 +6,9 @@ public class Test14EliminacionEnFaseDiurna {
     @Test
     public void testVotacionEliminaAlJugadorConMasVotos() {
         // Arrange
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador(new Ciudadano());
+        Jugador jugador2 = new Jugador(new Ciudadano());
+        Jugador jugador3 = new Jugador(new Ciudadano());
 
         FaseDiurna fase = new FaseDiurna();
         fase.nominar(jugador1);

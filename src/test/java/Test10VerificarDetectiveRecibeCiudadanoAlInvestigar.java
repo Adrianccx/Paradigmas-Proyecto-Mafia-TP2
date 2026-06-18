@@ -5,11 +5,9 @@ public class Test10VerificarDetectiveRecibeCiudadanoAlInvestigar {
     @Test
     public void testDetectiveInvestigaPadrinoYObtieneResultadoCiudadano() {
         // Arrange
-        Jugador detective = new Jugador();
-        detective.setRol(new Detective());
+        Jugador detective = new Jugador(new Detective());
 
-        Jugador padrino = new Jugador();
-        padrino.setRol(new Padrino());
+        Jugador padrino = new Jugador(new Padrino());
 
         // Act
         String resultado = detective.investigar(padrino);

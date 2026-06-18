@@ -4,11 +4,9 @@ public class Test12MedicoNoPuedeProtegerDosNoches {
     @Test
     public void testMedicoNoPuedeProtegerAlMismoJugadorDosNochesConsecutivas() {
         // Arrange
-        Jugador medico = new Jugador();
-        medico.setRol(new Medico());
+        Jugador medico = new Jugador(new Medico());
 
-        Jugador paciente = new Jugador();
-        paciente.setRol(new Ciudadano());
+        Jugador paciente = new Jugador(new Ciudadano());
 
         // Act
         medico.accionNocturna(paciente);

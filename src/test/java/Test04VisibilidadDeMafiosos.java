@@ -9,11 +9,9 @@ public class Test04VisibilidadDeMafiosos {
     @Test
     public void testCiudadanoNoTieneComplicesDeLaMafia() {
         //Arrange
-        Jugador mafioso = new Jugador();
-        mafioso.setRol(new Mafioso());
+        Jugador mafioso = new Jugador(new Mafioso());
 
-        Jugador ciudadano = new Jugador();
-        ciudadano.setRol(new Ciudadano());
+        Jugador ciudadano = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(List.of(mafioso, ciudadano));
 
@@ -27,14 +25,11 @@ public class Test04VisibilidadDeMafiosos {
     @Test
     public void testMafiosoConoceAlPadrinoComoComplice() {
         //Arrange
-        Jugador mafioso = new Jugador();
-        mafioso.setRol(new Mafioso());
+        Jugador mafioso = new Jugador(new Mafioso());
 
-        Jugador padrino = new Jugador();
-        padrino.setRol(new Padrino());
+        Jugador padrino = new Jugador(new Padrino());
 
-        Jugador ciudadano = new Jugador();
-        ciudadano.setRol(new Ciudadano());
+        Jugador ciudadano = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
 
@@ -50,14 +45,11 @@ public class Test04VisibilidadDeMafiosos {
     @Test
     public void testPadrinoConoceAlMafiosoComoComplice() {
         //Arrange
-        Jugador mafioso = new Jugador();
-        mafioso.setRol(new Mafioso());
+        Jugador mafioso = new Jugador(new Mafioso());
 
-        Jugador padrino = new Jugador();
-        padrino.setRol(new Padrino());
+        Jugador padrino = new Jugador(new Padrino());
 
-        Jugador ciudadano = new Jugador();
-        ciudadano.setRol(new Ciudadano());
+        Jugador ciudadano = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
 

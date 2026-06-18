@@ -1,10 +1,15 @@
+import java.util.Objects;
+
 public class Jugador {
 
     private Rol rol;
     private boolean protegido;
     private Jugador ultimoInvestigado;
-
     private boolean vivo = true;
+
+    public Jugador(Rol rol){
+        this.rol = Objects.requireNonNull(rol, "El rol no puede ser nulo");
+    }
 
     public boolean estaVivo() {
         return this.vivo;
@@ -20,10 +25,6 @@ public class Jugador {
 
     public boolean estaProtegido() {
         return this.protegido;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
     }
 
     public Rol revelarRol(Jugador solicitante) {

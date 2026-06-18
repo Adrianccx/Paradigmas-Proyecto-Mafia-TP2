@@ -9,8 +9,7 @@ public class Test05FaseNocturna {
     @Test
     public void testMafiaPuedeSeleccionarVictimaValida() {
         //Arrange
-        Jugador ciudadanoVivo = new Jugador();
-        ciudadanoVivo.setRol(new Ciudadano());
+        Jugador ciudadanoVivo = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(List.of(ciudadanoVivo));
 

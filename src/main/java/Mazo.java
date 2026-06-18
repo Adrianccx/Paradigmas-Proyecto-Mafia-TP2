@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,15 +11,11 @@ public class Mazo {
 
     }
 
-    public void repartir(List<Jugador> jugadores) {
+    public List<Rol> repartir(){
+        List<Rol> cartasRepartidas = new ArrayList<>(this.roles);
         Collections.shuffle(this.roles);
 
-        for(int i=0; i < jugadores.size(); i++){
-            Jugador jugadorActual = jugadores.get(i);
-            Rol cartaAsignada = this.roles.get(i);
-
-            jugadorActual.setRol(cartaAsignada);
-        }
-
+        return Collections.unmodifiableList(cartasRepartidas);
     }
+
 }

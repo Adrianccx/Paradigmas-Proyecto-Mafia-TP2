@@ -8,9 +8,8 @@ public class Test07AtacarProtegido {
     @Test
     public void testAtacarProtegido() {
 
-        Jugador victima = new Jugador();
-        Jugador medico = new Jugador();
-        medico.setRol(new Medico());
+        Jugador victima = new Jugador(new Ciudadano());
+        Jugador medico = new Jugador(new Medico());
 
         EstadoPartida estado = new EstadoPartida(List.of(medico, victima));
 

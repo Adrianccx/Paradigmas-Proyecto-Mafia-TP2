@@ -16,22 +16,21 @@ public class Test02MazoAleatorio {
 
         Mazo mazo = new Mazo(fabrica, 6);
 
-        List<Jugador> jugadores = new ArrayList<>();
-        for (int i=0; i<6; i++){
-            jugadores.add(new Jugador());
-        }
-
         //Act
-        mazo.repartir(jugadores);
+        List<Rol> cartasRepartidas = mazo.repartir();
+
+        List<Jugador> jugadores = new ArrayList<>();
+
+        for( Rol carta : cartasRepartidas){
+            jugadores.add(new Jugador(carta));
+        }
 
         //Assert
-        int jugadoresConRol = 0;
+        assertEquals(6, cartasRepartidas.size());
+        assertEquals(6, jugadores.size());
 
         for(Jugador jugador : jugadores){
-            if(jugador.getRol() != null){
-                jugadoresConRol++;
-            }
+            assertNotNull(jugador.revelarRol(jugador));
         }
-        assertEquals(6, jugadoresConRol);
     }
 }
