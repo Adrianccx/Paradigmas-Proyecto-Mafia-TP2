@@ -4,6 +4,10 @@ import java.util.List;
 
 public abstract class Rol {
 
+    public String nombre(){
+        return this.getClass().getSimpleName();
+    }
+
     public void accionNocturna(Jugador jugador){
     };
 
