@@ -1,18 +1,19 @@
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Test13NominacionesFaseNocturnaSoloSeaAVivos {
+    
     @Test
     public void testNominacionFaseDiurnaRechazaJugadoresEliminados() {
-        // Arrange
-        Jugador jugadorMuerto = new Jugador();
-        jugadorMuerto.setRol(new Ciudadano());
+        // Arrange 
+        Jugador jugadorMuerto = new Jugador(new Ciudadano());
 
-        // Lo matamos antes de que empiece el dia
-        jugadorMuerto.eliminar();
+        // Vinculamos al estado y lo eliminamos formalmente
+        EstadoPartida estado = new EstadoPartida(List.of(jugadorMuerto));
+        estado.eliminarJugador(jugadorMuerto);
 
-        FaseDiurna faseDiurna = new FaseDiurna();
+        FaseDiurna faseDiurna = new FaseDiurna(estado);
 
         // Act y Assert
         assertThrows(IllegalStateException.class, () -> {

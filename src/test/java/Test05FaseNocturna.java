@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Test05FaseNocturna {
@@ -9,11 +7,9 @@ public class Test05FaseNocturna {
     @Test
     public void testMafiaPuedeSeleccionarVictimaValida() {
         //Arrange
-        Jugador ciudadanoVivo = new Jugador();
-        ciudadanoVivo.setRol(new Ciudadano());
+        Jugador ciudadanoVivo = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(List.of(ciudadanoVivo));
-
         FaseNocturna faseNocturna = new FaseNocturna(estado);
 
         //Act y Assert

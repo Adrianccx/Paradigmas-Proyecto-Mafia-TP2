@@ -1,16 +1,13 @@
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class Test11DetectiveNoPuedeInvestigarDosNoches {
 
     @Test
     public void testDetectiveNoPuedeInvestigarAlMismoJugadorDosNochesConsecutivas() {
-        // Arrange
-        Jugador detective = new Jugador();
-        detective.setRol(new Detective());
-
-        Jugador sospechoso = new Jugador();
-        sospechoso.setRol(new Ciudadano());
+        // Arrange 
+        Jugador detective = new Jugador(new Detective());
+        Jugador sospechoso = new Jugador(new Ciudadano());
 
         // Act
         detective.investigar(sospechoso);

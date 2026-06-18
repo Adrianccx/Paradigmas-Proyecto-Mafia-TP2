@@ -5,28 +5,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Test15Ballotage {
+    
     @Test
     public void testEmpateSinEliminacionNadieMuere() {
-        // Arrange - Ahora todo pasa a través del EstadoPartida
-        Jugador j1 = new Jugador();
-        Jugador j2 = new Jugador();
+        // Arrange 
+        Jugador j1 = new Jugador(new Ciudadano());
+        Jugador j2 = new Jugador(new Ciudadano());
         EstadoPartida estado = new EstadoPartida(Arrays.asList(j1, j2));
 
-        // Configuramos que NO hay ballotage (Sin Eliminación)
         estado.setUsarBallotage(false);
 
-        // Creamos la fase inyectándole el estado (como pide el UML)
         FaseDiurna fase = new FaseDiurna(estado);
         fase.nominar(j1);
         fase.nominar(j2);
 
-        // Act - Empatan 2 a 2
+        // Act
         fase.votar(j1); fase.votar(j1);
         fase.votar(j2); fase.votar(j2);
-
         fase.resolverVotacion();
 
-        // Assert - Le preguntamos al estado si siguen vivos
+        // Assert
         assertTrue(estado.estaVivo(j1), "J1 debería sobrevivir");
         assertTrue(estado.estaVivo(j2), "J2 debería sobrevivir");
         assertFalse(fase.isEnBallotage());
@@ -34,13 +32,13 @@ public class Test15Ballotage {
 
     @Test
     public void testEmpateConBallotageFuerzaSegundaVuelta() {
-        // Arrange
-        Jugador j1 = new Jugador();
-        Jugador j2 = new Jugador();
-        Jugador j3 = new Jugador();
+        // Arrange 
+        Jugador j1 = new Jugador(new Ciudadano());
+        Jugador j2 = new Jugador(new Ciudadano());
+        Jugador j3 = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(Arrays.asList(j1, j2, j3));
-        estado.setUsarBallotage(true); // Activamos el ballotage
+        estado.setUsarBallotage(true);
 
         FaseDiurna fase = new FaseDiurna(estado);
         fase.nominar(j1);
@@ -50,10 +48,9 @@ public class Test15Ballotage {
         // Act1 - Empatan J1 y J2
         fase.votar(j1); fase.votar(j1);
         fase.votar(j2); fase.votar(j2);
-
         fase.resolverVotacion();
 
-        // Assert1 - Entramos en ballotage
+        // Assert1
         assertTrue(fase.isEnBallotage(), "Debería activarse la segunda vuelta");
         assertEquals(2, fase.getNominados().size());
 
@@ -61,7 +58,7 @@ public class Test15Ballotage {
         fase.votar(j1);
         fase.resolverVotacion();
 
-        // Assert2 - El estado elimina a J1
+        // Assert2
         assertFalse(estado.estaVivo(j1), "J1 debería morir en el ballotage");
         assertTrue(estado.estaVivo(j2), "J2 debería salvarse");
     }

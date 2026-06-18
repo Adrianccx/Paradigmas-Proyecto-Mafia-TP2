@@ -1,14 +1,13 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class Test12MedicoNoPuedeProtegerDosNoches {
+    
     @Test
     public void testMedicoNoPuedeProtegerAlMismoJugadorDosNochesConsecutivas() {
-        // Arrange
-        Jugador medico = new Jugador();
-        medico.setRol(new Medico());
-
-        Jugador paciente = new Jugador();
-        paciente.setRol(new Ciudadano());
+        // Arrange 
+        Jugador medico = new Jugador(new Medico());
+        Jugador paciente = new Jugador(new Ciudadano());
 
         // Act
         medico.accionNocturna(paciente);
