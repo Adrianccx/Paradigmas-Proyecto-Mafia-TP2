@@ -4,25 +4,20 @@ import java.util.List;
 public class Juego {
 
     public void notificarComplices(List<Jugador> jugadores) {
-        List<Jugador> mafiososEnPartida = new ArrayList<>();
+        List<Jugador> mafia = new ArrayList<>();
 
         for (Jugador jugador : jugadores) {
-            if (jugador.getRol() instanceof Mafioso) {
-                mafiososEnPartida.add(jugador);
+            if(jugador.esMafia()){
+                mafia.add(jugador);
             }
         }
 
-        for (Jugador mafiosoActual : mafiososEnPartida) {
+        for(Jugador integrante : mafia){
+            List<Jugador> complices = new ArrayList<>(mafia);
+            complices.remove(integrante);
 
-            List<Jugador> susComplices = new ArrayList<>();
-            for (Jugador posibleComplice : mafiososEnPartida) {
-                if (mafiosoActual != posibleComplice) {
-                    susComplices.add(posibleComplice);
-                }
-            }
-
-            Mafioso cartaMafioso = (Mafioso) mafiosoActual.getRol();
-            cartaMafioso.setComplices(susComplices);
+            integrante.recibirComplices(complices);
         }
+
     }
 }

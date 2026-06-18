@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Objects;
 
 public class Jugador {
@@ -23,6 +24,10 @@ public class Jugador {
         return this.rol;
     }
 
+    public boolean esMafia() {
+        return this.rol.esMafia();
+    }
+
     public boolean puedeSerEliminado(){
         return this.vivo && !this.protegido;
     }
@@ -45,9 +50,6 @@ public class Jugador {
         rol.accionNocturna(jugador);
     }
 
-    public boolean esMafia() {
-        return this.rol.esMafia();
-    }
 
     public String investigar(Jugador objetivo) {
         if (this.ultimoInvestigado == objetivo) {
@@ -65,5 +67,13 @@ public class Jugador {
         else {
             return "Ciudadano";
         }
+    }
+
+    public void recibirComplices(List<Jugador> complices){
+        this.rol.recibirComplices(complices);
+    }
+
+    public List<Jugador> obtenerComplices(){
+        return this.rol.obtenerComplices();
     }
 }
