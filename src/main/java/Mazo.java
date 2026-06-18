@@ -4,8 +4,10 @@ import java.util.List;
 public class Mazo {
 
     private List<Rol> roles;
-    public void incializarMazo(FabricaMazo fabrica, int cantidadJugadores) {
+
+    public Mazo(FabricaMazo fabrica, int cantidadJugadores){
         this.roles = fabrica.generarCartas(cantidadJugadores);
+
     }
 
     public void repartir(List<Jugador> jugadores) {

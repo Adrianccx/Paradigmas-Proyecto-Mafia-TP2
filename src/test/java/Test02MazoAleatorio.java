@@ -13,9 +13,8 @@ public class Test02MazoAleatorio {
     public void testRepartirRolesDebeAsignarUnaCartaACadaJugador(){
         //Arrange
         FabricaMazo fabrica = new FabricaMazoEstandar();
-        Mazo mazo = new Mazo();
 
-        mazo.incializarMazo(fabrica, 6);
+        Mazo mazo = new Mazo(fabrica, 6);
 
         List<Jugador> jugadores = new ArrayList<>();
         for (int i=0; i<6; i++){
