@@ -9,10 +9,12 @@ public class Test08AtacarSinProteccion {
     @Test
     public void testAtacarSinProteccionEliminaALaVictima() {
         Jugador victima = new Jugador(new Ciudadano());
+
         EstadoPartida estado = new EstadoPartida(List.of(victima));
+        FaseNocturna fase = new FaseNocturna(estado);
 
-
-        estado.eliminarJugador(victima);
+        fase.registrarVictimaMafia(victima);
+        fase.ejecutarFase();
 
         assertFalse(estado.estaVivo(victima));
         assertFalse(victima.estaVivo());

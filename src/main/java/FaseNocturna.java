@@ -1,6 +1,7 @@
-public class FaseNocturna {
+public class FaseNocturna implements Fase{
 
     private EstadoPartida estado;
+    private Jugador victimaMafia;
 
     public FaseNocturna(EstadoPartida estado) {
         this.estado = estado;
@@ -13,5 +14,15 @@ public class FaseNocturna {
         if (victima.esMafia()) {
             throw new IllegalArgumentException("La Mafia no puede atacarse a si misma");
         }
+        this.victimaMafia = victima;
+    }
+
+    @Override
+    public void ejecutarFase(){
+        if(this.victimaMafia == null){
+            return;
+        }
+        estado.eliminarJugador(this.victimaMafia);
+        this.victimaMafia = null;
     }
 }
