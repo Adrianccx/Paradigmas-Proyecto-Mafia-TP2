@@ -7,6 +7,7 @@ public class EstadoPartida {
 
     private Collection<Jugador> jugadoresVivos = new ArrayList<>();
     private Collection<Jugador> jugadoresEliminados = new ArrayList<>();
+    private boolean usarBallotage = false; // Parámetro de configuración
 
     public EstadoPartida(){};
 
@@ -51,5 +52,13 @@ public class EstadoPartida {
             }
         }
         return Collections.unmodifiableList(complices);
+    }
+
+    public void setUsarBallotage(boolean usarBallotage) {
+        this.usarBallotage = usarBallotage;
+    }
+
+    public boolean isUsarBallotage() {
+        return this.usarBallotage;
     }
 }
