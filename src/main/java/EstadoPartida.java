@@ -9,9 +9,7 @@ public class EstadoPartida {
     private Collection<Jugador> jugadoresEliminados = new ArrayList<>();
     private boolean usarBallotage = false; // Parámetro de configuración
 
-    public EstadoPartida(){};
-
-    public EstadoPartida(List<Jugador> jugadores){
+    public EstadoPartida(Collection<Jugador> jugadores){
         this.jugadoresVivos = new ArrayList<>(jugadores);
         this.jugadoresEliminados = new ArrayList<>();
     }
@@ -22,10 +20,6 @@ public class EstadoPartida {
 
     public Collection<Jugador> getJugadoresEliminados() {
         return Collections.unmodifiableCollection(jugadoresEliminados);
-    }
-
-    public void añadirJugador(Jugador jugador) {
-        jugadoresVivos.add(jugador);
     }
 
     public void eliminarJugador(Jugador jugador) {
