@@ -23,8 +23,8 @@ public class Jugador {
         return this.rol;
     }
 
-    public boolean estaProtegido() {
-        return this.protegido;
+    public boolean puedeSerEliminado(){
+        return this.vivo && !this.protegido;
     }
 
     public Rol revelarRol(Jugador solicitante) {

@@ -29,11 +29,14 @@ public class EstadoPartida {
     }
 
     public void eliminarJugador(Jugador jugador) {
-        if (jugador.estaProtegido()) {
+        if (!jugador.puedeSerEliminado()) {
             return;
         }
-        jugadoresVivos.remove(jugador);
-        jugadoresEliminados.add(jugador);
+
+        if (jugadoresVivos.remove(jugador)) {
+            jugador.eliminar();
+            jugadoresEliminados.add(jugador);
+        }
     }
 
     public boolean estaVivo(Jugador jugador) {
