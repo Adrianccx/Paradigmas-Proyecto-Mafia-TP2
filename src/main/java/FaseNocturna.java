@@ -11,34 +11,22 @@ public class FaseNocturna implements Fase {
         if (victima == null) {
             throw new IllegalArgumentException("La víctima no puede ser nula.");
         }
-
         if (!victima.estaVivo()) {
             throw new IllegalArgumentException("El jugador seleccionado ya esta eliminado");
         }
-
         if (victima.getBando().equals(new BandoMafia())) {
             throw new IllegalArgumentException("La Mafia no puede atacarse a si misma");
         }
-
-        this.elegidoPorMafia = victima;
+        elegidoPorMafia = victima;
     }
 
     @Override
     public void ejecutarFase() {
         if (elegidoPorMafia == null) return;
-
         if (elegidoPorMafia.estaDesprotegido()) {
-            if (estado != null) {
-                estado.eliminarJugador(elegidoPorMafia);
-            } else {
-                elegidoPorMafia.eliminar();
-            }
+            estado.eliminarJugador(elegidoPorMafia);
         }
-
-        this.elegidoPorMafia = null;
+        elegidoPorMafia = null;
     }
 
-    public Jugador getElegidoPorMafia() {
-        return this.elegidoPorMafia;
-    }
 }
