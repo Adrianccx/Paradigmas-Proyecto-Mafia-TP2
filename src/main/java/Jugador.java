@@ -8,9 +8,6 @@ public class Jugador {
     private boolean vivo = true;
 
     public Jugador(Rol rol) {
-        if (rol == null) {
-            throw new IllegalArgumentException("Un jugador no puede existir sin un rol asignado.");
-        }
         this.rol = rol;
     }
 
@@ -20,9 +17,9 @@ public class Jugador {
     public boolean estaProtegido() { return this.protegido; }
     public void proteger() { this.protegido = true; }
 
-    public Rol revelarRol(Jugador solicitante) {
-        if (!this.vivo || this == solicitante) {
-            return this.rol;
+    public Rol revelarRol(Jugador revelado) {
+        if (!revelado.vivo || this == revelado) {
+            return revelado.rol;
         }
         return null;
     }

@@ -15,7 +15,7 @@ public class Test03VisibilidadJugador {
         assertTrue(rolVistoPorSiMismo instanceof Ciudadano);
 
         //Act y Assert 2: Jugador 1 intenta ver el rol del Jugador 2 (Debe dar null)
-        Rol rolVistoPorOtro = jugador2.revelarRol(jugador1);
+        Rol rolVistoPorOtro = jugador1.revelarRol(jugador2);
         assertNull(rolVistoPorOtro);
     }
 }

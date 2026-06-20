@@ -13,14 +13,14 @@ public class Test16CartaDelEliminadoSeRevelaParaTodos {
         Jugador otroJugador = new Jugador(new Ciudadano()); // Rol testigo
 
         // Act1
-        Rol rolOculto = victima.revelarRol(otroJugador);
+        Rol rolOculto = otroJugador.revelarRol(victima);
 
         // Assert1 - Sigue vivo, da null
         assertNull(rolOculto, "El rol debe ser secreto mientras el jugador esté vivo");
 
         // Act2 - Eliminamos al jugador
         victima.eliminar();
-        Rol rolRevelado = victima.revelarRol(otroJugador);
+        Rol rolRevelado = otroJugador.revelarRol(victima);
 
         // Assert2 - Ahora que murió, expone su rol
         assertNotNull(rolRevelado, "El rol debe ser público cuando el jugador muere");
