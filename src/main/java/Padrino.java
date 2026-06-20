@@ -7,20 +7,19 @@ public class Padrino extends Rol {
 
     @Override
     public Bando getBandoReal() {
-        return Bando.MAFIA;
+        return new BandoMafia();
     }
 
     @Override
     public Bando getBandoInvestigacion() {
-        return Bando.CIUDADANO; // Engaña al Detective
+        return new BandoCiudadano(); // Engaña al Detective
     }
 
     @Override
 public List<Jugador> obtenerComplices(Jugador propio, Collection<Jugador> jugadoresVivos) {
     List<Jugador> resultado = new ArrayList<>();
     for (Jugador j : jugadoresVivos) {
-        // Cambiamos j.esMafia() por j.getBandoReal() == Bando.MAFIA
-        if (j != propio && j.getBandoReal() == Bando.MAFIA) {
+        if (j != propio && j.getBandoReal() == new BandoMafia()) {
             resultado.add(j);
         }
     }

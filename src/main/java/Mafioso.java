@@ -7,15 +7,14 @@ public class Mafioso extends Rol {
 
     @Override
     public Bando getBandoReal() {
-        return Bando.MAFIA;
+        return new BandoMafia();
     }
 
    @Override
 public List<Jugador> obtenerComplices(Jugador propio, Collection<Jugador> jugadoresVivos) {
     List<Jugador> resultado = new ArrayList<>();
     for (Jugador j : jugadoresVivos) {
-        // Cambiamos j.esMafia() por j.getBandoReal() == Bando.MAFIA
-        if (j != propio && j.getBandoReal() == Bando.MAFIA) {
+        if (j != propio && j.getBandoReal() == new BandoMafia()) {
             resultado.add(j);
         }
     }

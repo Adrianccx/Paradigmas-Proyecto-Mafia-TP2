@@ -13,7 +13,7 @@ public class Test09DeyectiveRecibeResultadoCorrectoAlInvestigarAMafioso {
         Bando resultado = detective.investigar(mafioso);
 
         // Assert
-        assertEquals(Bando.MAFIA, resultado);
+        assertEquals(new BandoMafia(), resultado);
     }
 
     @Test
@@ -26,6 +26,6 @@ public class Test09DeyectiveRecibeResultadoCorrectoAlInvestigarAMafioso {
         Bando resultado = detective.investigar(ciudadano);
 
         // Assert
-        assertEquals(Bando.CIUDADANO, resultado);
+        assertEquals(new BandoCiudadano(), resultado);
     }
 }
