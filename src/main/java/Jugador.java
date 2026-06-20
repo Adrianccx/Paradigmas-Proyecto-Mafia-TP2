@@ -35,24 +35,31 @@ public class Jugador {
     }
 
     public void accionNocturna(Jugador jugador) {
-        if (!this.vivo) {
+        if (!vivo) {
             throw new IllegalStateException("Un jugador eliminado no puede realizar acciones.");
         }
         rol.accionNocturna(jugador);
     }
 
     public Bando investigar(Jugador objetivo) {
-        if (this.ultimoInvestigado == objetivo) {
+        if (ultimoInvestigado == objetivo) {
             throw new IllegalStateException("No podés investigar al mismo jugador dos noches consecutivas.");
         }
-        this.ultimoInvestigado = objetivo;
+        ultimoInvestigado = objetivo;
         return objetivo.getBandoInvestigacion(); 
     }
 
-    public Bando getBando() { return this.rol.getBando(); }
-    public Bando getBandoInvestigacion() { return this.rol.getBandoInvestigacion(); }
-    public String getNombreRol() { return this.rol.nombre(); }
+    public Bando getBando() {
+        return rol.getBando();
+    }
 
+    public Bando getBandoInvestigacion() {
+        return rol.getBandoInvestigacion();
+    }
+
+    public String getNombreRol() {
+        return rol.nombre();
+    }
 
     public List<Jugador> obtenerEquipo(Collection<Jugador> jugadoresVivos) {
         return this.rol.obtenerEquipo(this, jugadoresVivos);
