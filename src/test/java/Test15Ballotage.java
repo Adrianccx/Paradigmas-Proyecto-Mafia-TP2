@@ -27,7 +27,6 @@ public class Test15Ballotage {
         // Assert
         assertTrue(j1.estaVivo(), "J1 debería sobrevivir");
         assertTrue(j2.estaVivo(), "J2 debería sobrevivir");
-        assertFalse(fase.isEnBallotage());
     }
 
     @Test
@@ -51,7 +50,6 @@ public class Test15Ballotage {
         fase.resolverVotacion();
 
         // Assert1
-        assertTrue(fase.isEnBallotage(), "Debería activarse la segunda vuelta");
         assertEquals(2, fase.getNominados().size());
 
         // Act2 - Desempate final

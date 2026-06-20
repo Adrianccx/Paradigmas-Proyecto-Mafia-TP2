@@ -8,7 +8,6 @@ public class FaseDiurna implements Fase {
     private EstadoPartida estado;
     private List<Jugador> jugadoresNominados = new ArrayList<>();
     private Map<Jugador, Integer> urnaDeVotos = new HashMap<>();
-    private boolean enBallotage = false;
 
     public FaseDiurna(EstadoPartida estado) {
         this.estado = estado;
@@ -40,46 +39,48 @@ public class FaseDiurna implements Fase {
         urnaDeVotos.put(nominado, votosActuales + 1);
     }
 
-    public void resolverVotacion() {
+    private ArrayList<Jugador> obtenerGanadoresVotacion(Map<Jugador, Integer> urnaDeVotos) {
         int mayorVotos = -1;
-        List<Jugador> empatados = new ArrayList<>();
+        ArrayList<Jugador> ganadores = new ArrayList<Jugador>();
         for (Map.Entry<Jugador, Integer> boleta : urnaDeVotos.entrySet()) {
             if (boleta.getValue() > mayorVotos) {
                 mayorVotos = boleta.getValue();
-                empatados.clear();
-                empatados.add(boleta.getKey());
+                ganadores.clear();
+                ganadores.add(boleta.getKey());
             } else if (boleta.getValue() == mayorVotos) {
-                empatados.add(boleta.getKey());
+                ganadores.add(boleta.getKey());
             }
         }
+        return ganadores;
+    }
 
-        if (empatados.size() == 1) {
-            if (estado != null) {
-                estado.eliminarJugador(empatados.get(0)); // Linchamiento garantizado
-            } else {
-                empatados.get(0).eliminar();
-            }
-            enBallotage = false;
-        }
-        else if (empatados.size() > 1 && maxVotos > 0) {
-            boolean usarBallotage = (estado != null) && estado.isUsarBallotage();
+    private Boolean hay_ballotage(List<Jugador> ganadores) {
+        return estado.isUsarBallotage() && ganadores.size() > 1;
+    }
 
-            if (usarBallotage) {
-                enBallotage = true;
-                jugadoresNominados.clear();
-                jugadoresNominados.addAll(empatados);
-                urnaDeVotos.clear();
-                for (Jugador j : empatados) {
-                    urnaDeVotos.put(j, 0);
-                }
-            } else {
-                enBallotage = false;
-            }
+    private Boolean hay_ganador(List<Jugador> ganadores) {
+        return ganadores.size() == 1;
+    }
+
+    private void resetearVotos(List<Jugador> jugadores) {
+        jugadoresNominados.clear();
+        jugadoresNominados.addAll(jugadores);
+        urnaDeVotos.clear();
+        for (Jugador j : jugadores) {
+            urnaDeVotos.put(j, 0);
         }
     }
 
-    public boolean isEnBallotage() {
-        return enBallotage;
+    public void resolverVotacion() {
+        List<Jugador> ganadores = obtenerGanadoresVotacion(urnaDeVotos);
+
+        if (hay_ganador(ganadores)) {
+            estado.eliminarJugador(ganadores.get(0));
+        }
+
+        if (hay_ballotage(ganadores)) {
+            resetearVotos(ganadores);
+        }
     }
 
     public List<Jugador> getNominados() {
