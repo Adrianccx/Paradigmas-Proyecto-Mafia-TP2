@@ -1,28 +1,41 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Juego {
 
-    public void notificarComplices(List<Jugador> jugadores) {
-        List<Jugador> mafiososEnPartida = new ArrayList<>();
+    private final EstadoPartida estadoPartida;
+    private final FaseDiurna faseDiurna;
+    private final FaseNocturna faseNocturna;
 
-        for (Jugador jugador : jugadores) {
-            if (jugador.getRol() instanceof Mafioso) {
-                mafiososEnPartida.add(jugador);
-            }
-        }
+    public Juego(FabricaMazo fabrica, int cantidadJugadores) {
+        // 1. Usamos el mazo seguro para dar nacimiento a los jugadores
+        Mazo mazo = new Mazo(fabrica, cantidadJugadores);
+        List<Jugador> jugadoresListos = mazo.crearJugadores();
+        
+        // 2. Inicializamos EstadoPartida con la lista naciente
+        this.estadoPartida = new EstadoPartida(jugadoresListos);
+        
+        // 3. Compartimos el estado con ambas fases
+        this.faseDiurna = new FaseDiurna(this.estadoPartida);
+        this.faseNocturna = new FaseNocturna(this.estadoPartida);
+    }
 
-        for (Jugador mafiosoActual : mafiososEnPartida) {
+    public EstadoPartida getEstadoPartida() {
+        return this.estadoPartida;
+    }
 
-            List<Jugador> susComplices = new ArrayList<>();
-            for (Jugador posibleComplice : mafiososEnPartida) {
-                if (mafiosoActual != posibleComplice) {
-                    susComplices.add(posibleComplice);
-                }
-            }
+    public FaseDiurna getFaseDiurna() {
+        return this.faseDiurna;
+    }
 
-            Mafioso cartaMafioso = (Mafioso) mafiosoActual.getRol();
-            cartaMafioso.setComplices(susComplices);
-        }
+    public FaseNocturna getFaseNocturna() {
+        return this.faseNocturna;
+    }
+
+    public boolean yaTenemosGanador() {
+        return this.estadoPartida.verificarGanador() != null;
+    }
+    
+    public Bando obtenerGanador() {
+        return this.estadoPartida.verificarGanador();
     }
 }

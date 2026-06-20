@@ -1,16 +1,13 @@
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Test06VictimaInvalida {
 
     @Test
     public void testSistemaRechazaVictimaMuerta() {
-        //Arrange
-        Jugador ciudadanoMuerto = new Jugador();
-        ciudadanoMuerto.setRol(new Ciudadano());
+        //Arrange - Modificado al constructor con Rol directo
+        Jugador ciudadanoMuerto = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(List.of(ciudadanoMuerto));
         estado.eliminarJugador(ciudadanoMuerto);
@@ -29,11 +26,9 @@ public class Test06VictimaInvalida {
     @Test
     public void testSistemaRechazaVictimaMafiosa() {
         //Arrange
-        Jugador compañeroMafioso = new Jugador();
-        compañeroMafioso.setRol(new Mafioso());
+        Jugador compañeroMafioso = new Jugador(new Mafioso());
 
         EstadoPartida estado = new EstadoPartida(List.of(compañeroMafioso));
-
         FaseNocturna faseNocturna = new FaseNocturna(estado);
 
         //Act
@@ -44,4 +39,5 @@ public class Test06VictimaInvalida {
         //Assert
         assertEquals("La Mafia no puede atacarse a si misma", errorMafia.getMessage());
     }
+
 }

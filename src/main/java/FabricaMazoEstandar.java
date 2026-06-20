@@ -5,37 +5,41 @@ public class FabricaMazoEstandar implements FabricaMazo {
 
     @Override
     public List<Rol> generarCartas(int cantidadJugadores) {
-
-        List<Rol> mazo = new ArrayList<>();
-
-        int cantDeMafiosos = cantidadJugadores/3;
+        List<Rol> cartas = new ArrayList<>();
+        
+        // 1. Calcular bases de la Mafia (1/3 del total de jugadores)
+        int cantDeMafiosos = cantidadJugadores / 3;
         int cantEspeciales = 0;
 
-        mazo.add(new Detective());
+        // 2. Agregar Detective (Siempre está)
+        cartas.add(new Detective());
         cantEspeciales++;
 
-        if(cantidadJugadores>=7){
-            mazo.add(new Medico());
+        // 3. Regla para 7 o más jugadores: entra el Médico
+        if (cantidadJugadores >= 7) {
+            cartas.add(new Medico());
             cantEspeciales++;
         }
 
-        if(cantidadJugadores>=10){
-            mazo.add(new Sheriff());
-            mazo.add(new Padrino());
-            cantEspeciales+=2;
-            cantDeMafiosos--;
+        // 4. Regla para 10 o más jugadores: entran Sheriff y Padrino
+        if (cantidadJugadores >= 10) {
+            cartas.add(new Sheriff());
+            cartas.add(new Padrino());
+            cantEspeciales += 2;
+            cantDeMafiosos--; // El Padrino reemplaza a un Mafioso común para balancear
         }
 
-
+        // 5. Rellenar con los Mafiosos comunes restantes
         for (int i = 0; i < cantDeMafiosos; i++) {
-            mazo.add(new Mafioso());
+            cartas.add(new Mafioso());
         }
 
-
+        // 6. El resto de los lugares se llena con Ciudadanos comunes
         int cantCiudadanos = cantidadJugadores - cantDeMafiosos - cantEspeciales;
         for (int i = 0; i < cantCiudadanos; i++) {
-            mazo.add(new Ciudadano());
+            cartas.add(new Ciudadano());
         }
-        return mazo;
+
+        return cartas;
     }
 }

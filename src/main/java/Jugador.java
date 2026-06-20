@@ -1,36 +1,55 @@
+import java.util.Collection;
+import java.util.List;
+
 public class Jugador {
-
-    private Rol rol;
+    private final Rol rol;
     private boolean protegido;
+    private Jugador ultimoInvestigado;
+    private boolean vivo = true;
 
-    public Rol getRol() {
-        return this.rol;
-    }
-
-    public boolean estaProtegido() {
-        return this.protegido;
-    }
-
-    public void setRol(Rol rol) {
+    public Jugador(Rol rol) {
+        if (rol == null) {
+            throw new IllegalArgumentException("Un jugador no puede existir sin un rol asignado.");
+        }
         this.rol = rol;
     }
 
+    public boolean estaVivo() { return this.vivo; }
+    public void eliminar() { this.vivo = false; }
+    public boolean puedeSerEliminado() { return !this.estaProtegido(); }
+    public boolean estaProtegido() { return this.protegido; }
+    public void proteger() { this.protegido = true; }
+
     public Rol revelarRol(Jugador solicitante) {
-        if (this == solicitante) {
+        if (!this.vivo || this == solicitante) {
             return this.rol;
         }
         return null;
     }
 
-    public void proteger() {
-        protegido = true;
-    }
-
     public void accionNocturna(Jugador jugador) {
+        if (!this.vivo) {
+            throw new IllegalStateException("Un jugador eliminado no puede realizar acciones.");
+        }
         rol.accionNocturna(jugador);
     }
 
-    public boolean esMafia(){
-        return this.rol.esMafia();
+    // El detective ejecuta este método
+    public Bando investigar(Jugador objetivo) {
+        if (this.ultimoInvestigado == objetivo) {
+            throw new IllegalStateException("No podés investigar al mismo jugador dos noches consecutivas.");
+        }
+        this.ultimoInvestigado = objetivo;
+        return objetivo.getBandoInvestigacion(); 
     }
+
+    public Bando getBandoReal() { return this.rol.getBandoReal(); }
+    public Bando getBandoInvestigacion() { return this.rol.getBandoInvestigacion(); }
+    public String getNombreRol() { return this.rol.nombre(); }
+
+
+    public List<Jugador> obtenerComplices(Collection<Jugador> jugadoresVivos) {
+        return this.rol.obtenerComplices(this, jugadoresVivos);
+    }
+
 }
