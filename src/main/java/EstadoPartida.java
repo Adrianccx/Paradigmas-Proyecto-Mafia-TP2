@@ -5,41 +5,38 @@ import java.util.List;
 
 public class EstadoPartida {
 
-    private Collection<Jugador> jugadoresVivos = new ArrayList<>();
-    private Collection<Jugador> jugadoresEliminados = new ArrayList<>();
+    private Collection<Jugador> jugadores = new ArrayList<>();
     private boolean usarBallotage = false; 
 
     public EstadoPartida(){};
 
     public EstadoPartida(List<Jugador> jugadores){
-        this.jugadoresVivos = new ArrayList<>(jugadores);
-        this.jugadoresEliminados = new ArrayList<>();
+        this.jugadores = new ArrayList<>(jugadores);
     }
 
-    public Collection<Jugador> getJugadoresVivos() {
-        return Collections.unmodifiableCollection(jugadoresVivos);
+    public Collection<Jugador> getJugadores() {
+        return Collections.unmodifiableCollection(jugadores);
     }
 
     public Collection<Jugador> getJugadoresEliminados() {
-        return Collections.unmodifiableCollection(jugadoresEliminados);
+        // LOOP A JUGADORES Y DEVOLVER MUERTOS
+        return Collections.emptyList();
     }
 
     public void añadirJugador(Jugador jugador) {
-        jugadoresVivos.add(jugador);
+        jugadores.add(jugador);
     }
 
     public void eliminarJugador(Jugador jugador) {
-        jugadoresVivos.remove(jugador);
-        jugadoresEliminados.add(jugador);
         jugador.eliminar();
     }
 
     public boolean estaVivo(Jugador jugador) {
-        return jugadoresVivos.contains(jugador);
+        return jugadores.contains(jugador);
     }
 
     public List<Jugador> complicesDe(Jugador jugador) {
-    return jugador.obtenerEquipo(this.jugadoresVivos);
+    return jugador.obtenerEquipo(this.jugadores);
     }
 
     public void setUsarBallotage(boolean usarBallotage) {
@@ -54,7 +51,7 @@ public class EstadoPartida {
         int mafiososVivos = 0;
         int ciudadanosVivos = 0;
 
-        for (Jugador j : jugadoresVivos) {
+        for (Jugador j : jugadores) {
             if (j.getBando() == new BandoMafia()) {
                 mafiososVivos++;
             } else {

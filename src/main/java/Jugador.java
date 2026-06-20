@@ -58,7 +58,7 @@ public class Jugador {
     }
 
     public String getNombreRol() {
-        return rol.nombre();
+        return rol.getNombre();
     }
 
     public List<Jugador> obtenerEquipo(Collection<Jugador> jugadoresVivos) {

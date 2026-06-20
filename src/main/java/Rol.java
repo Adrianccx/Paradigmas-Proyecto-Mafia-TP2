@@ -7,7 +7,7 @@ public abstract class Rol {
 
     public Bando bando;
 
-    public String nombre() {
+    public String getNombre() {
         return this.getClass().getSimpleName();
     }
 
