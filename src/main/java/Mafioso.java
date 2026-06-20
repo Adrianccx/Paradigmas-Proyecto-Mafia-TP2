@@ -5,9 +5,8 @@ import java.util.List;
 
 public class Mafioso extends Rol {
 
-    @Override
-    public Bando getBando() {
-        return new BandoMafia();
+    public Mafioso() {
+        bando = new BandoMafia();
     }
 
 }

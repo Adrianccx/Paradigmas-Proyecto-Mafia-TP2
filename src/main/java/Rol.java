@@ -11,10 +11,16 @@ public abstract class Rol {
         return this.getClass().getSimpleName();
     }
 
-    public abstract Bando getBando();
+    public Bando getBando() {
+        return bando;
+    }
 
     public Bando getBandoInvestigacion() {
         return getBando();
+    }
+
+    public void setBando(Bando bando) {
+        this.bando = bando;
     }
 
     public void accionNocturna(Jugador jugador) {}

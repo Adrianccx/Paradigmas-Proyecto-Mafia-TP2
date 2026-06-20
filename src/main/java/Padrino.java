@@ -5,9 +5,8 @@ import java.util.List;
 
 public class Padrino extends Rol {
 
-    @Override
-    public Bando getBando() {
-        return new BandoMafia();
+    public Padrino() {
+        bando = new BandoMafia();
     }
 
     @Override

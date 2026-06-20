@@ -14,8 +14,7 @@ public class Medico extends Rol {
         protegerA(jugador);
     }
 
-    @Override
-    public Bando getBando() {
-        return new BandoCiudadano();
+    public Medico() {
+        bando = new BandoCiudadano();
     }
 }
