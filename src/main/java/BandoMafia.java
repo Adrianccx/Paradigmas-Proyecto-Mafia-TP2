@@ -1,10 +1,7 @@
-public class BandoMafia implements Bando {    @Override
-    public boolean equals(BandoCiudadano bando) {
-        return false;
-    }
+public class BandoMafia extends Bando {
 
     @Override
-    public boolean equals(BandoMafia bando) {
-        return true;
+    public String getNombre() {
+        return "Mafia";
     }
 }

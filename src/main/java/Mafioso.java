@@ -14,7 +14,7 @@ public class Mafioso extends Rol {
 public List<Jugador> obtenerComplices(Jugador propio, Collection<Jugador> jugadoresVivos) {
     List<Jugador> resultado = new ArrayList<>();
     for (Jugador j : jugadoresVivos) {
-        if (j != propio && j.getBandoReal() == new BandoMafia()) {
+        if (j != propio && j.getBandoReal().equals(new BandoMafia())) {
             resultado.add(j);
         }
     }
