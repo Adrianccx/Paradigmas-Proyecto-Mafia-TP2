@@ -30,7 +30,7 @@ public class FaseNocturna implements Fase {
     public void ejecutarFase() {
         if (elegidoPorMafia == null) return;
 
-        if (!elegidoPorMafia.estaProtegido()) {
+        if (elegidoPorMafia.estaDesprotegido()) {
             if (estado != null) {
                 estado.eliminarJugador(elegidoPorMafia);
             } else {

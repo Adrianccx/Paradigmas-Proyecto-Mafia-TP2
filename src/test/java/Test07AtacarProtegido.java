@@ -14,7 +14,7 @@ public class Test07AtacarProtegido {
         
         medico.accionNocturna(victima);
 
-        if (!victima.estaProtegido()) {  
+        if (victima.estaDesprotegido()) {
             estado.eliminarJugador(victima);
         }
 

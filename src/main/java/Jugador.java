@@ -11,11 +11,21 @@ public class Jugador {
         this.rol = rol;
     }
 
-    public boolean estaVivo() { return this.vivo; }
-    public void eliminar() { this.vivo = false; }
-    public boolean puedeSerEliminado() { return !this.estaProtegido(); }
-    public boolean estaProtegido() { return this.protegido; }
-    public void proteger() { this.protegido = true; }
+    public boolean estaVivo() {
+        return this.vivo;
+    }
+
+    public void eliminar() {
+        this.vivo = false;
+    }
+
+    public boolean estaDesprotegido() {
+        return !this.protegido;
+    }
+
+    public void proteger() {
+        this.protegido = true;
+    }
 
     public Rol revelarRol(Jugador revelado) {
         if (!revelado.vivo || this == revelado) {
