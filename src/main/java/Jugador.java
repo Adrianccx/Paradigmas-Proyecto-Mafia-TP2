@@ -42,7 +42,7 @@ public class Jugador {
         return objetivo.getBandoInvestigacion(); 
     }
 
-    public Bando getBandoReal() { return this.rol.getBandoReal(); }
+    public Bando getBando() { return this.rol.getBando(); }
     public Bando getBandoInvestigacion() { return this.rol.getBandoInvestigacion(); }
     public String getNombreRol() { return this.rol.nombre(); }
 

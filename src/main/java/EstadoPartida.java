@@ -55,7 +55,7 @@ public class EstadoPartida {
         int ciudadanosVivos = 0;
 
         for (Jugador j : jugadoresVivos) {
-            if (j.getBandoReal() == new BandoMafia()) {
+            if (j.getBando() == new BandoMafia()) {
                 mafiososVivos++;
             } else {
                 ciudadanosVivos++;

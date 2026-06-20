@@ -11,10 +11,10 @@ public abstract class Rol {
         return this.getClass().getSimpleName();
     }
 
-    public abstract Bando getBandoReal();
+    public abstract Bando getBando();
 
     public Bando getBandoInvestigacion() {
-        return getBandoReal();
+        return getBando();
     }
 
     public void accionNocturna(Jugador jugador) {}
@@ -22,7 +22,7 @@ public abstract class Rol {
     public List<Jugador> obtenerEquipo(Jugador propio, Collection<Jugador> jugadoresVivos) {
         List<Jugador> resultado = new ArrayList<>();
         for (Jugador j : jugadoresVivos) {
-            if (j != propio && j.getBandoReal().equals(getBandoReal())) {
+            if (j != propio && j.getBando().equals(getBando())) {
                 resultado.add(j);
             }
         }

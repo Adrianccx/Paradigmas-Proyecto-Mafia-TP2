@@ -19,7 +19,7 @@ public class Test02MazoAleatorio {
         
         int jugadoresConRol = 0;
         for (Jugador jugador : jugadores) {
-            if (jugador.getBandoReal() != null) {
+            if (jugador.getBando() != null) {
                 jugadoresConRol++;
             }
         }

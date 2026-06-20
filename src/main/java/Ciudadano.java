@@ -1,6 +1,6 @@
 public class Ciudadano extends Rol {
     @Override
-    public Bando getBandoReal() {
+    public Bando getBando() {
         return new BandoCiudadano();
     }
 }
