@@ -12,7 +12,7 @@ public class Padrino extends Rol {
 
     @Override
     public Bando getBandoInvestigacion() {
-        return new BandoCiudadano(); // Engaña al Detective
+        return new BandoCiudadano();
     }
 
     @Override

@@ -68,6 +68,6 @@ public class EstadoPartida {
 
         if (mafiososVivos == 0) return new BandoCiudadano();
         if (mafiososVivos >= ciudadanosVivos) return new BandoMafia();
-        return null; // Sigue la partida
+        return null;
     }
 }

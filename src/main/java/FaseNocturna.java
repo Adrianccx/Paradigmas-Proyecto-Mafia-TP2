@@ -28,10 +28,8 @@ public class FaseNocturna implements Fase {
 
     @Override
     public void ejecutarFase() {
-        // Si la mafia no eligió a nadie (o no hubo consenso), no pasa nada
         if (elegidoPorMafia == null) return;
 
-        // Si el médico NO lo salvó, el Estado procesa la eliminación.
         if (!elegidoPorMafia.estaProtegido()) {
             if (estado != null) {
                 estado.eliminarJugador(elegidoPorMafia);
@@ -40,7 +38,6 @@ public class FaseNocturna implements Fase {
             }
         }
 
-        // Limpiamos la víctima para que la próxima noche empiece desde cero
         this.elegidoPorMafia = null;
     }
 

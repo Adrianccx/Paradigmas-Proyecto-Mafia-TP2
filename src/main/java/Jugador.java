@@ -34,7 +34,6 @@ public class Jugador {
         rol.accionNocturna(jugador);
     }
 
-    // El detective ejecuta este método
     public Bando investigar(Jugador objetivo) {
         if (this.ultimoInvestigado == objetivo) {
             throw new IllegalStateException("No podés investigar al mismo jugador dos noches consecutivas.");
