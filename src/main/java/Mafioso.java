@@ -10,14 +10,4 @@ public class Mafioso extends Rol {
         return new BandoMafia();
     }
 
-   @Override
-public List<Jugador> obtenerComplices(Jugador propio, Collection<Jugador> jugadoresVivos) {
-    List<Jugador> resultado = new ArrayList<>();
-    for (Jugador j : jugadoresVivos) {
-        if (j != propio && j.getBandoReal().equals(new BandoMafia())) {
-            resultado.add(j);
-        }
-    }
-    return Collections.unmodifiableList(resultado);
-}
 }

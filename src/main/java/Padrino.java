@@ -14,15 +14,4 @@ public class Padrino extends Rol {
     public Bando getBandoInvestigacion() {
         return new BandoCiudadano();
     }
-
-    @Override
-public List<Jugador> obtenerComplices(Jugador propio, Collection<Jugador> jugadoresVivos) {
-    List<Jugador> resultado = new ArrayList<>();
-    for (Jugador j : jugadoresVivos) {
-        if (j != propio && j.getBandoReal() == new BandoMafia()) {
-            resultado.add(j);
-        }
-    }
-    return Collections.unmodifiableList(resultado);
-}
 }

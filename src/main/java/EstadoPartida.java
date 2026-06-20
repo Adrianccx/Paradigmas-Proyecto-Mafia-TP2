@@ -28,12 +28,10 @@ public class EstadoPartida {
         jugadoresVivos.add(jugador);
     }
 
-    // MODIFICACIÓN: Ahora es una eliminación directa. El control de si se puede 
-    // defender o no pasa a ser responsabilidad de la Fase Nocturna (reglas de la noche).
     public void eliminarJugador(Jugador jugador) {
         jugadoresVivos.remove(jugador);
         jugadoresEliminados.add(jugador);
-        jugador.eliminar(); // Le avisamos al jugador internamente que murió
+        jugador.eliminar();
     }
 
     public boolean estaVivo(Jugador jugador) {
@@ -41,8 +39,7 @@ public class EstadoPartida {
     }
 
     public List<Jugador> complicesDe(Jugador jugador) {
-      // El jugador y su rol saben qué hacer.
-    return jugador.obtenerComplices(this.jugadoresVivos); 
+    return jugador.obtenerEquipo(this.jugadoresVivos);
     }
 
     public void setUsarBallotage(boolean usarBallotage) {
@@ -53,7 +50,6 @@ public class EstadoPartida {
         return this.usarBallotage;
     }
 
-    // método rápido para que el Juego sepa si alguien ya ganó
     public Bando verificarGanador() {
         int mafiososVivos = 0;
         int ciudadanosVivos = 0;

@@ -47,8 +47,8 @@ public class Jugador {
     public String getNombreRol() { return this.rol.nombre(); }
 
 
-    public List<Jugador> obtenerComplices(Collection<Jugador> jugadoresVivos) {
-        return this.rol.obtenerComplices(this, jugadoresVivos);
+    public List<Jugador> obtenerEquipo(Collection<Jugador> jugadoresVivos) {
+        return this.rol.obtenerEquipo(this, jugadoresVivos);
     }
 
 }
