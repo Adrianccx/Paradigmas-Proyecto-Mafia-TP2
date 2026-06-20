@@ -25,8 +25,8 @@ public class Test15Ballotage {
         fase.resolverVotacion();
 
         // Assert
-        assertTrue(estado.estaVivo(j1), "J1 debería sobrevivir");
-        assertTrue(estado.estaVivo(j2), "J2 debería sobrevivir");
+        assertTrue(j1.estaVivo(), "J1 debería sobrevivir");
+        assertTrue(j2.estaVivo(), "J2 debería sobrevivir");
         assertFalse(fase.isEnBallotage());
     }
 
@@ -59,7 +59,7 @@ public class Test15Ballotage {
         fase.resolverVotacion();
 
         // Assert2
-        assertFalse(estado.estaVivo(j1), "J1 debería morir en el ballotage");
-        assertTrue(estado.estaVivo(j2), "J2 debería salvarse");
+        assertFalse(j1.estaVivo(), "J1 debería morir en el ballotage");
+        assertTrue(j2.estaVivo(), "J2 debería salvarse");
     }
 }

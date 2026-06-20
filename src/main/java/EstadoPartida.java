@@ -19,8 +19,13 @@ public class EstadoPartida {
     }
 
     public Collection<Jugador> getJugadoresEliminados() {
-        // LOOP A JUGADORES Y DEVOLVER MUERTOS
-        return Collections.emptyList();
+        Collection<Jugador> muertos = new ArrayList<>();
+        for (Jugador j : jugadores) {
+            if (!j.estaVivo()) {
+                muertos.add(j);
+            }
+        }
+        return muertos;
     }
 
     public void añadirJugador(Jugador jugador) {
@@ -31,12 +36,8 @@ public class EstadoPartida {
         jugador.eliminar();
     }
 
-    public boolean estaVivo(Jugador jugador) {
-        return jugadores.contains(jugador);
-    }
-
     public List<Jugador> complicesDe(Jugador jugador) {
-    return jugador.obtenerEquipo(this.jugadores);
+        return jugador.obtenerEquipo(this.jugadores);
     }
 
     public void setUsarBallotage(boolean usarBallotage) {
@@ -44,7 +45,7 @@ public class EstadoPartida {
     }
 
     public boolean isUsarBallotage() {
-        return this.usarBallotage;
+        return usarBallotage;
     }
 
     public Bando verificarGanador() {

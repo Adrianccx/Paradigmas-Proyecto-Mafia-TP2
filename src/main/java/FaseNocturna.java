@@ -12,17 +12,14 @@ public class FaseNocturna implements Fase {
             throw new IllegalArgumentException("La víctima no puede ser nula.");
         }
 
-        // 1. Verificación de vida: un fantasma no puede morir dos veces
-        if (estado != null && !estado.estaVivo(victima)) {
+        if (!victima.estaVivo()) {
             throw new IllegalArgumentException("El jugador seleccionado ya esta eliminado");
         }
-        
-        // 2. Verificación de bando: evita el "fuego amigo" usando el Enum Bando
+
         if (victima.getBando().equals(new BandoMafia())) {
             throw new IllegalArgumentException("La Mafia no puede atacarse a si misma");
         }
-        
-        // Si pasa los filtros, se confirma el objetivo de la noche
+
         this.elegidoPorMafia = victima;
     }
 

@@ -23,9 +23,8 @@ public class FaseDiurna implements Fase {
     }
 
     public void nominar(Jugador objetivo) {
-        boolean estaVivo = (estado != null) ? estado.estaVivo(objetivo) : objetivo.estaVivo();
 
-        if (!estaVivo) {
+        if (!objetivo.estaVivo()) {
             throw new IllegalStateException("Las nominaciones solo pueden incluir a jugadores vivos.");
         }
 
@@ -42,14 +41,14 @@ public class FaseDiurna implements Fase {
     }
 
     public void resolverVotacion() {
-        int maxVotos = -1;
+        int mayorVotos = -1;
         List<Jugador> empatados = new ArrayList<>();
         for (Map.Entry<Jugador, Integer> boleta : urnaDeVotos.entrySet()) {
-            if (boleta.getValue() > maxVotos) {
-                maxVotos = boleta.getValue();
+            if (boleta.getValue() > mayorVotos) {
+                mayorVotos = boleta.getValue();
                 empatados.clear();
                 empatados.add(boleta.getKey());
-            } else if (boleta.getValue() == maxVotos) {
+            } else if (boleta.getValue() == mayorVotos) {
                 empatados.add(boleta.getKey());
             }
         }

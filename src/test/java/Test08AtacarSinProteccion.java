@@ -14,6 +14,6 @@ public class Test08AtacarSinProteccion {
         estado.eliminarJugador(victima);
 
         //Assert
-        assertFalse(estado.estaVivo(victima), "La víctima debería estar muerta.");
+        assertFalse(victima.estaVivo(), "La víctima debería estar muerta.");
     }
 }

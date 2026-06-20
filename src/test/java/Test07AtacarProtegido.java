@@ -21,6 +21,6 @@ public class Test07AtacarProtegido {
         //Act
         
         //Assert
-        assertTrue(estado.estaVivo(victima), "La víctima debería estar viva.");
+        assertTrue(victima.estaVivo(), "La víctima debería estar viva.");
     }
 }
