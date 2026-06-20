@@ -18,7 +18,7 @@ public class FaseNocturna implements Fase {
         }
         
         // 2. Verificación de bando: evita el "fuego amigo" usando el Enum Bando
-        if (victima.getBandoReal() == new BandoMafia()) {
+        if (victima.getBandoReal().equals(new BandoMafia())) {
             throw new IllegalArgumentException("La Mafia no puede atacarse a si misma");
         }
         
