@@ -1,3 +1,8 @@
+package fase;
+
+import estado.EstadoPartida;
+import jugador.Jugador;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

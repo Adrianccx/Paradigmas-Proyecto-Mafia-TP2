@@ -1,3 +1,8 @@
+package mazo;
+
+import rol.Rol;
+import rol.roles.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +16,7 @@ public class FabricaMazoEstandar implements FabricaMazo {
         int cantDeMafiosos = cantidadJugadores / 3;
         int cantEspeciales = 0;
 
-        // 2. Agregar Detective (Siempre está)
+        // 2. Agregar rol.roles.Detective (Siempre está)
         cartas.add(new Detective());
         cantEspeciales++;
 
@@ -21,12 +26,12 @@ public class FabricaMazoEstandar implements FabricaMazo {
             cantEspeciales++;
         }
 
-        // 4. Regla para 10 o más jugadores: entran Sheriff y Padrino
+        // 4. Regla para 10 o más jugadores: entran rol.roles.Sheriff y rol.roles.Padrino
         if (cantidadJugadores >= 10) {
             cartas.add(new Sheriff());
             cartas.add(new Padrino());
             cantEspeciales += 2;
-            cantDeMafiosos--; // El Padrino reemplaza a un Mafioso común para balancear
+            cantDeMafiosos--; // El rol.roles.Padrino reemplaza a un rol.roles.Mafioso común para balancear
         }
 
         // 5. Rellenar con los Mafiosos comunes restantes

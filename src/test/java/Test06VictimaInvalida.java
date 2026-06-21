@@ -1,4 +1,10 @@
+import estado.EstadoPartida;
+import fase.FaseNocturna;
+import jugador.Jugador;
 import org.junit.jupiter.api.Test;
+import rol.roles.Ciudadano;
+import rol.roles.Mafioso;
+
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +12,7 @@ public class Test06VictimaInvalida {
 
     @Test
     public void testSistemaRechazaVictimaMuerta() {
-        //Arrange - Modificado al constructor con Rol directo
+        //Arrange - Modificado al constructor con rol.Rol directo
         Jugador ciudadanoMuerto = new Jugador(new Ciudadano());
 
         EstadoPartida estado = new EstadoPartida(List.of(ciudadanoMuerto));

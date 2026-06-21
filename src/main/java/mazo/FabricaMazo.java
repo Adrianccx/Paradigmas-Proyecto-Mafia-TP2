@@ -1,3 +1,6 @@
+package mazo;
+
+import rol.Rol;
 
 import java.util.List;
 

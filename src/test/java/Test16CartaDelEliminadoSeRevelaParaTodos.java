@@ -1,4 +1,8 @@
+import jugador.Jugador;
 import org.junit.jupiter.api.Test;
+import rol.Rol;
+import rol.roles.Ciudadano;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +14,7 @@ public class Test16CartaDelEliminadoSeRevelaParaTodos {
         // Arrange 
         Rol rolVictima = new Ciudadano();
         Jugador victima = new Jugador(rolVictima);
-        Jugador otroJugador = new Jugador(new Ciudadano()); // Rol testigo
+        Jugador otroJugador = new Jugador(new Ciudadano()); // rol.Rol testigo
 
         // Act1
         Rol rolOculto = otroJugador.revelarRol(victima);

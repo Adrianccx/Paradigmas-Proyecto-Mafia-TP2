@@ -1,3 +1,9 @@
+import bando.Bando;
+import estado.EstadoPartida;
+import jugador.Jugador;
+import mazo.FabricaMazo;
+import mazo.Mazo;
+
 import java.util.List;
 
 public class Juego {

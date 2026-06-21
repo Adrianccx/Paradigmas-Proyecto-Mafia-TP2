@@ -1,4 +1,8 @@
+import jugador.Jugador;
 import org.junit.jupiter.api.Test;
+import rol.roles.Ciudadano;
+import rol.roles.Medico;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Test12MedicoNoPuedeProtegerDosNoches {

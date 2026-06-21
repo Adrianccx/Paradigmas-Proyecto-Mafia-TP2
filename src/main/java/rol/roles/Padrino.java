@@ -1,7 +1,9 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+package rol.roles;
+
+import bando.Bando;
+import bando.BandoCiudadano;
+import bando.BandoMafia;
+import rol.Rol;
 
 public class Padrino extends Rol {
 

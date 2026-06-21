@@ -1,4 +1,8 @@
+import estado.EstadoPartida;
+import jugador.Jugador;
 import org.junit.jupiter.api.Test;
+import rol.roles.Ciudadano;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class Test08AtacarSinProteccion {

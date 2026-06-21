@@ -1,3 +1,10 @@
+package estado;
+
+import bando.Bando;
+import bando.BandoCiudadano;
+import bando.BandoMafia;
+import jugador.Jugador;
+
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Collections;

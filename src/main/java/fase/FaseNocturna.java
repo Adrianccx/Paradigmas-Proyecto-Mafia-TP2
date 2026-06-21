@@ -1,3 +1,9 @@
+package fase;
+
+import bando.BandoMafia;
+import estado.EstadoPartida;
+import jugador.Jugador;
+
 public class FaseNocturna implements Fase {
     
     private EstadoPartida estado;

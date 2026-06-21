@@ -1,3 +1,7 @@
+import jugador.Jugador;
+import mazo.FabricaMazo;
+import mazo.FabricaMazoEstandar;
+import mazo.Mazo;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;

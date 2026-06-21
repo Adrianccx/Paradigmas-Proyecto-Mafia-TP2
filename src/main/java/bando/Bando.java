@@ -1,3 +1,4 @@
+package bando;
 
 public abstract class Bando {
     public abstract String getNombre();

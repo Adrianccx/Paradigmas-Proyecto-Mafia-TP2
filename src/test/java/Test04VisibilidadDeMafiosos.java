@@ -1,4 +1,10 @@
+import estado.EstadoPartida;
+import jugador.Jugador;
 import org.junit.jupiter.api.Test;
+import rol.roles.Ciudadano;
+import rol.roles.Mafioso;
+import rol.roles.Padrino;
+
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,3 +1,5 @@
+package bando;
+
 public class BandoMafia extends Bando {
 
     @Override

@@ -1,4 +1,9 @@
+import estado.EstadoPartida;
+import fase.FaseDiurna;
+import jugador.Jugador;
 import org.junit.jupiter.api.Test;
+import rol.roles.Ciudadano;
+
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

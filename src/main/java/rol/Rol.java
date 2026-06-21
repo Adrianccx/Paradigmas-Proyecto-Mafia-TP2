@@ -1,3 +1,8 @@
+package rol;
+
+import bando.Bando;
+import jugador.Jugador;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
