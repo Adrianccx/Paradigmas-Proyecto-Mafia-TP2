@@ -36,7 +36,7 @@ public class EstadoPartida {
         jugador.eliminar();
     }
 
-    public List<Jugador> complicesDe(Jugador jugador) {
+    public List<Jugador> obtenerEquipo(Jugador jugador) {
         return jugador.obtenerEquipo(this.jugadores);
     }
 

@@ -13,7 +13,7 @@ public class Test04VisibilidadDeMafiosos {
         EstadoPartida estado = new EstadoPartida(List.of(mafioso, ciudadano));
 
         //Act
-        List<Jugador> complicesDelCiudadano = estado.complicesDe(ciudadano);
+        List<Jugador> complicesDelCiudadano = estado.obtenerEquipo(ciudadano);
 
         //Assert
         assertTrue(complicesDelCiudadano.isEmpty());
@@ -29,7 +29,7 @@ public class Test04VisibilidadDeMafiosos {
     EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
 
     //Act
-    List<Jugador> complicesDelMafioso = estado.complicesDe(mafioso);
+    List<Jugador> complicesDelMafioso = estado.obtenerEquipo(mafioso);
 
     //Assert
     assertTrue(complicesDelMafioso.contains(padrino));
@@ -47,7 +47,7 @@ public class Test04VisibilidadDeMafiosos {
         EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
 
         //Act
-        List<Jugador> complicesDelPadrino = estado.complicesDe(padrino);
+        List<Jugador> complicesDelPadrino = estado.obtenerEquipo(padrino);
 
         //Assert
         assertTrue(complicesDelPadrino.contains(mafioso));
