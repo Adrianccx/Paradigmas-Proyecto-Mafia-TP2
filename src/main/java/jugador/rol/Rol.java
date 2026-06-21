@@ -1,6 +1,6 @@
-package rol;
+package jugador.rol;
 
-import bando.Bando;
+import jugador.rol.bando.Bando;
 import jugador.Jugador;
 
 import java.util.ArrayList;

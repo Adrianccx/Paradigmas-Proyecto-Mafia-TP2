@@ -1,8 +1,8 @@
-package rol.roles;
+package jugador.rol.roles;
 
-import bando.BandoCiudadano;
+import jugador.rol.bando.BandoCiudadano;
 import jugador.Jugador;
-import rol.Rol;
+import jugador.rol.Rol;
 
 public class Medico extends Rol {
     private Jugador ultimoProtegido;

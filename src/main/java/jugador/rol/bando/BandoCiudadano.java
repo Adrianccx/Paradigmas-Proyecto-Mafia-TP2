@@ -1,4 +1,4 @@
-package bando;
+package jugador.rol.bando;
 
 public class BandoCiudadano extends Bando {
 

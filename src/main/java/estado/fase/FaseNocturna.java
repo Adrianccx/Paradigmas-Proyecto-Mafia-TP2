@@ -1,6 +1,6 @@
-package fase;
+package estado.fase;
 
-import bando.BandoMafia;
+import jugador.rol.bando.BandoMafia;
 import estado.EstadoPartida;
 import jugador.Jugador;
 

@@ -1,7 +1,7 @@
-package rol.roles;
+package jugador.rol.roles;
 
-import bando.BandoMafia;
-import rol.Rol;
+import jugador.rol.bando.BandoMafia;
+import jugador.rol.Rol;
 
 public class Mafioso extends Rol {
 

@@ -1,9 +1,9 @@
-package rol.roles;
+package jugador.rol.roles;
 
-import bando.Bando;
-import bando.BandoCiudadano;
-import bando.BandoMafia;
-import rol.Rol;
+import jugador.rol.bando.Bando;
+import jugador.rol.bando.BandoCiudadano;
+import jugador.rol.bando.BandoMafia;
+import jugador.rol.Rol;
 
 public class Padrino extends Rol {
 

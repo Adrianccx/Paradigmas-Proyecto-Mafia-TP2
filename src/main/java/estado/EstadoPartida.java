@@ -1,8 +1,8 @@
 package estado;
 
-import bando.Bando;
-import bando.BandoCiudadano;
-import bando.BandoMafia;
+import jugador.rol.bando.Bando;
+import jugador.rol.bando.BandoCiudadano;
+import jugador.rol.bando.BandoMafia;
 import jugador.Jugador;
 
 import java.util.Collection;

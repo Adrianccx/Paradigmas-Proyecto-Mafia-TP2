@@ -1,11 +1,11 @@
-import bando.Bando;
-import bando.BandoCiudadano;
-import bando.BandoMafia;
+import jugador.rol.bando.Bando;
+import jugador.rol.bando.BandoCiudadano;
+import jugador.rol.bando.BandoMafia;
 import jugador.Jugador;
 import org.junit.jupiter.api.Test;
-import rol.roles.Ciudadano;
-import rol.roles.Detective;
-import rol.roles.Mafioso;
+import jugador.rol.roles.Ciudadano;
+import jugador.rol.roles.Detective;
+import jugador.rol.roles.Mafioso;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

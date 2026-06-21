@@ -1,4 +1,4 @@
-package bando;
+package jugador.rol.bando;
 
 public abstract class Bando {
     public abstract String getNombre();

@@ -1,8 +1,8 @@
 import jugador.Jugador;
 import org.junit.jupiter.api.Test;
-import rol.Rol;
-import rol.roles.Ciudadano;
-import rol.roles.Mafioso;
+import jugador.rol.Rol;
+import jugador.rol.roles.Ciudadano;
+import jugador.rol.roles.Mafioso;
 
 import static org.junit.jupiter.api.Assertions.*;
 

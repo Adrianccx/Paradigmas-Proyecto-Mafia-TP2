@@ -1,8 +1,8 @@
+import jugador.rol.roles.*;
 import mazo.FabricaMazo;
 import mazo.FabricaMazoEstandar;
 import org.junit.jupiter.api.Test;
-import rol.Rol;
-import rol.roles.*;
+import jugador.rol.Rol;
 
 import java.util.List;
 

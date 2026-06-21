@@ -1,7 +1,7 @@
 package mazo;
 
-import rol.Rol;
-import rol.roles.*;
+import jugador.rol.Rol;
+import jugador.rol.roles.*;
 
 import java.util.ArrayList;
 import java.util.List;

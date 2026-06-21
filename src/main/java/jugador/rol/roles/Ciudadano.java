@@ -1,7 +1,7 @@
-package rol.roles;
+package jugador.rol.roles;
 
-import bando.BandoCiudadano;
-import rol.Rol;
+import jugador.rol.bando.BandoCiudadano;
+import jugador.rol.Rol;
 
 public class Ciudadano extends Rol {
 

@@ -1,4 +1,4 @@
-import bando.Bando;
+import jugador.rol.bando.Bando;
 import estado.EstadoPartida;
 import jugador.Jugador;
 import mazo.FabricaMazo;

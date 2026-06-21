@@ -1,4 +1,4 @@
-package fase;
+package estado.fase;
 
 import estado.EstadoPartida;
 import jugador.Jugador;
