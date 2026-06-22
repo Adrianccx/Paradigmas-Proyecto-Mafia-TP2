@@ -1,3 +1,4 @@
+import interfaz.MenuPrincipal;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -16,32 +17,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
-        stage.setTitle("Ejemplo Integrador");
-
-        TextField texto = new TextField();
-        texto.setPromptText("Ingrese el texto deseado");
-
-        Label etiqueta = new Label();
-        etiqueta.setText(texto.getText());
-
-        Button botonEnviar = new Button();
-        botonEnviar.setText("Enviar");
-
-        Button botonLimpiar = new Button();
-        botonLimpiar.setText("Limpiar cuadro texto");
-
-        HBox contenedorHorizontal = new HBox(botonEnviar, botonLimpiar);
-        contenedorHorizontal.setSpacing(10);
-
-        VBox contenedorPrincipal = new VBox(texto, contenedorHorizontal, etiqueta);
-        contenedorPrincipal.setSpacing(10);
-        contenedorPrincipal.setPadding(new Insets(20));
-
-        Scene scene = new Scene(contenedorPrincipal, 300, 250);
-
-        stage.setScene(scene);
-
+        stage.setTitle("Mafia");
+        stage.setScene(new MenuPrincipal());
         stage.show();
     }
 }
