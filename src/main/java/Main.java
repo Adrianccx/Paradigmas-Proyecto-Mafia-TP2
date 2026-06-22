@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("Mafia");
-        stage.setScene(new MenuPrincipal());
+        stage.setScene(new MenuPrincipal(stage));
         stage.show();
     }
 }
