@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import jugador.rol.roles.Ciudadano;
 import jugador.rol.roles.Mafioso;
 
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +16,7 @@ public class Test06VictimaInvalida {
         //Arrange - Modificado al constructor con rol.Rol directo
         Jugador ciudadanoMuerto = new Jugador(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida(List.of(ciudadanoMuerto));
+        EstadoPartida estado = new EstadoPartida(Arrays.asList(ciudadanoMuerto));
         estado.eliminarJugador(ciudadanoMuerto);
 
         FaseNocturna faseNocturna = new FaseNocturna(estado);
@@ -34,7 +35,7 @@ public class Test06VictimaInvalida {
         //Arrange
         Jugador compañeroMafioso = new Jugador(new Mafioso());
 
-        EstadoPartida estado = new EstadoPartida(List.of(compañeroMafioso));
+        EstadoPartida estado = new EstadoPartida(Arrays.asList(compañeroMafioso));
         FaseNocturna faseNocturna = new FaseNocturna(estado);
 
         //Act

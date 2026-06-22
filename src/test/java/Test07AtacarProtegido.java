@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import jugador.rol.roles.Ciudadano;
 import jugador.rol.roles.Medico;
 
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +16,7 @@ public class Test07AtacarProtegido {
         Jugador victima = new Jugador(new Ciudadano());
         Jugador medico = new Jugador(new Medico());
 
-        EstadoPartida estado = new EstadoPartida(List.of(medico, victima));
+        EstadoPartida estado = new EstadoPartida(Arrays.asList(medico, victima));
         
         medico.accionNocturna(victima);
 

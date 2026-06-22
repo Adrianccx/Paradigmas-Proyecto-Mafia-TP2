@@ -5,6 +5,7 @@ import jugador.rol.roles.Ciudadano;
 import jugador.rol.roles.Mafioso;
 import jugador.rol.roles.Padrino;
 
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +17,7 @@ public class Test04VisibilidadDeMafiosos {
         Jugador mafioso = new Jugador(new Mafioso());
         Jugador ciudadano = new Jugador(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida(List.of(mafioso, ciudadano));
+        EstadoPartida estado = new EstadoPartida(Arrays.asList(mafioso, ciudadano));
 
         //Act
         List<Jugador> complicesDelCiudadano = estado.obtenerEquipo(ciudadano);
@@ -32,7 +33,7 @@ public class Test04VisibilidadDeMafiosos {
     Jugador padrino = new Jugador(new Padrino());
     Jugador ciudadano = new Jugador(new Ciudadano());
 
-    EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
+    EstadoPartida estado = new EstadoPartida(Arrays.asList(mafioso, padrino, ciudadano));
 
     //Act
     List<Jugador> complicesDelMafioso = estado.obtenerEquipo(mafioso);
@@ -50,7 +51,7 @@ public class Test04VisibilidadDeMafiosos {
         Jugador padrino = new Jugador(new Padrino());
         Jugador ciudadano = new Jugador(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida(List.of(mafioso, padrino, ciudadano));
+        EstadoPartida estado = new EstadoPartida(Arrays.asList(mafioso, padrino, ciudadano));
 
         //Act
         List<Jugador> complicesDelPadrino = estado.obtenerEquipo(padrino);

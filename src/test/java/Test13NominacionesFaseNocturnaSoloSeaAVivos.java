@@ -4,6 +4,7 @@ import jugador.Jugador;
 import org.junit.jupiter.api.Test;
 import jugador.rol.roles.Ciudadano;
 
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,7 +16,7 @@ public class Test13NominacionesFaseNocturnaSoloSeaAVivos {
         Jugador jugadorMuerto = new Jugador(new Ciudadano());
 
         // Vinculamos al estado y lo eliminamos formalmente
-        EstadoPartida estado = new EstadoPartida(List.of(jugadorMuerto));
+        EstadoPartida estado = new EstadoPartida(Arrays.asList(jugadorMuerto));
         estado.eliminarJugador(jugadorMuerto);
 
         FaseDiurna faseDiurna = new FaseDiurna(estado);

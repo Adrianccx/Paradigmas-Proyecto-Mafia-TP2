@@ -4,6 +4,7 @@ import jugador.Jugador;
 import org.junit.jupiter.api.Test;
 import jugador.rol.roles.Ciudadano;
 
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,7 +19,7 @@ public class Test14EliminacionEnFaseDiurna {
         Jugador jugador3 = new Jugador(new Ciudadano());
 
         // Creamos el estado y se lo pasamos a la fase
-        EstadoPartida estado = new EstadoPartida(List.of(jugador1, jugador2, jugador3));
+        EstadoPartida estado = new EstadoPartida(Arrays.asList(jugador1, jugador2, jugador3));
         FaseDiurna fase = new FaseDiurna(estado);
         
         fase.nominar(jugador1);

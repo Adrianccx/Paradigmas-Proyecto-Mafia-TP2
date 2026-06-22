@@ -4,6 +4,8 @@ import jugador.Jugador;
 import org.junit.jupiter.api.Test;
 import jugador.rol.roles.Ciudadano;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +16,7 @@ public class Test05FaseNocturna {
         //Arrange
         Jugador ciudadanoVivo = new Jugador(new Ciudadano());
 
-        EstadoPartida estado = new EstadoPartida(List.of(ciudadanoVivo));
+        EstadoPartida estado = new EstadoPartida(Collections.singletonList(ciudadanoVivo));
         FaseNocturna faseNocturna = new FaseNocturna(estado);
 
         //Act y Assert
