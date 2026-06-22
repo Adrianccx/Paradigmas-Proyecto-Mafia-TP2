@@ -10,28 +10,24 @@ import javafx.scene.layout.VBox;
 public class MenuPrincipal extends Scene {
     public MenuPrincipal() {
         super(new Pane(), 800, 600);
-        //TextField texto = new TextField();
-        //texto.setPromptText("Ingrese el texto deseado");
-
-        //Button botonEnviar = new Button();
-        //botonEnviar.setText("Enviar");
-
-        //Button botonLimpiar = new Button();
-        //botonLimpiar.setText("Limpiar cuadro texto");
-
-        //HBox contenedorHorizontal = new HBox(botonEnviar, botonLimpiar);
-        //contenedorHorizontal.setSpacing(10);
 
         Button botonJugar = new Button();
         botonJugar.setText("Jugar");
 
+        Button botonConfig = new Button();
+        botonConfig.setText("Configuración");
+
         Button botonSalir = new BotonSalir();
 
-        VBox contenedorPrincipal = new VBox(botonJugar, botonSalir);
-        contenedorPrincipal.setSpacing(10);
-        contenedorPrincipal.setPadding(new Insets(20));
-        contenedorPrincipal.setAlignment(Pos.CENTER);
-        setRoot(contenedorPrincipal);
+        VBox contenedorPrincipal = new VBox(
+                botonJugar,
+                botonConfig,
+                botonSalir
+        );
 
+        contenedorPrincipal.setSpacing(10);
+        contenedorPrincipal.setAlignment(Pos.CENTER);
+
+        setRoot(contenedorPrincipal);
     }
 }
