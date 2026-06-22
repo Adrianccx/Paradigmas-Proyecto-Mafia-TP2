@@ -1,6 +1,6 @@
-package estado.fase;
+package juego.fase;
 
-import estado.EstadoPartida;
+import juego.EstadoPartida;
 import jugador.Jugador;
 
 import java.util.ArrayList;

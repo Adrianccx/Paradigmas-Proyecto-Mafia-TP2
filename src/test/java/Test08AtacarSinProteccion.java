@@ -1,4 +1,4 @@
-import estado.EstadoPartida;
+import juego.EstadoPartida;
 import jugador.Jugador;
 import org.junit.jupiter.api.Test;
 import jugador.rol.roles.Ciudadano;

@@ -1,5 +1,5 @@
-import estado.EstadoPartida;
-import estado.fase.FaseDiurna;
+import juego.EstadoPartida;
+import juego.fase.FaseDiurna;
 import jugador.Jugador;
 import org.junit.jupiter.api.Test;
 import jugador.rol.roles.Ciudadano;

@@ -1,4 +1,4 @@
-package estado.fase;
+package juego.fase;
 
 public interface Fase {
     void ejecutarFase();

@@ -1,4 +1,4 @@
-package estado;
+package juego;
 
 import jugador.rol.bando.Bando;
 import jugador.rol.bando.BandoCiudadano;

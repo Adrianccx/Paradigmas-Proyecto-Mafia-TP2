@@ -1,7 +1,7 @@
-package estado.fase;
+package juego.fase;
 
 import jugador.rol.bando.BandoMafia;
-import estado.EstadoPartida;
+import juego.EstadoPartida;
 import jugador.Jugador;
 
 public class FaseNocturna implements Fase {
