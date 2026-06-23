@@ -23,11 +23,10 @@ public class Mazo {
         Collections.shuffle(this.roles);
     }
 
-    public List<Jugador> crearJugadores() {
-        List<Jugador> jugadores = new ArrayList<>();
-        for (Rol rol : this.roles) {
-            jugadores.add(new Jugador(rol));
+    public Rol darRol() {
+        if (roles.isEmpty()) {
+            return null;
         }
-        return jugadores;
+        return roles.remove(0);
     }
 }

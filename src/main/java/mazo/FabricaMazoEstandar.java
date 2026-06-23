@@ -34,7 +34,7 @@ public class FabricaMazoEstandar implements FabricaMazo {
         for (int i = 0; i < cantMafiososComunes; i++) {
             cartas.add(new Mafioso());
         }
-        
+
         int cantCiudadanos = cantidadJugadores - cantMafiososComunes - cantEspeciales;
         for (int i = 0; i < cantCiudadanos; i++) {
             cartas.add(new Ciudadano());
