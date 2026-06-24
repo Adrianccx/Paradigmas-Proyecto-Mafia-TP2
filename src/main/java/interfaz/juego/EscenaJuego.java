@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import juego.EstadoPartida;
+import jugador.Jugador;
 import juego.Juego;
 import mazo.FabricaMazo;
 import jugador.rol.Rol;
@@ -25,6 +26,7 @@ import javafx.geometry.Insets;
 
 public class EscenaJuego extends Scene {
     private EstadoPartida estado;
+    private List<Jugador> jugadores;
     private CuadriculaJugadores cuadricula;
     private BorderPane panel;
     private Spinner<Integer> selectorJugadores;
@@ -186,11 +188,49 @@ public class EscenaJuego extends Scene {
 
         Juego nuevoJuego = new Juego(crearFabricaDinamica(), selectorJugadores.getValue());
         setEstado(nuevoJuego.getEstadoPartida());
-        panel.setCenter(this.cuadricula);
+
+        mostrarTurnoJugador(0);
     }
 
     public void setEstado(EstadoPartida estado) {
         this.estado = estado;
-        this.cuadricula.setJugadores(estado.getJugadores());
+        this.jugadores = new ArrayList<>(estado.getJugadores());
+        this.cuadricula.setJugadores(this.jugadores);
+    }
+
+    private void mostrarTurnoJugador(int indiceJugador){
+        PanelTurnoJugador panelTurno = new PanelTurnoJugador(
+                indiceJugador + 1,
+                () -> mostrarInfoJugador(indiceJugador)
+        );
+
+        panel.setCenter(panelTurno);
+    }
+
+    private void mostrarInfoJugador(int indiceJugador){
+        Jugador jugador = jugadores.get(indiceJugador);
+
+        PanelInfoJugador panelInfo = new PanelInfoJugador(
+                jugador,
+                indiceJugador + 1,
+                () -> avaanzarLuegoDeMostrarInfo(indiceJugador)
+        );
+
+        panel.setCenter(panelInfo);
+    }
+
+    private void avaanzarLuegoDeMostrarInfo(int indiceJugador){
+        int siguienteJugador = indiceJugador + 1;
+
+        if(siguienteJugador < jugadores.size()){
+            mostrarTurnoJugador(siguienteJugador);
+        } else {
+            mostrarTableroJugadores();
+        }
+
+    }
+
+    private void mostrarTableroJugadores(){
+        panel.setCenter(this.cuadricula);
     }
 }
