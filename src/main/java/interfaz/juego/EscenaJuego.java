@@ -213,6 +213,7 @@ public class EscenaJuego extends Scene {
         PanelInfoJugador panelInfo = new PanelInfoJugador(
                 jugador,
                 indiceJugador + 1,
+                this.jugadores,
                 () -> avaanzarLuegoDeMostrarInfo(indiceJugador)
         );
 
