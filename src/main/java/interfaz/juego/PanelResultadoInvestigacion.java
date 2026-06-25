@@ -23,7 +23,7 @@ public class PanelResultadoInvestigacion extends VBox {
         int numeroInvestigado = jugadores.indexOf(investigado) + 1;
 
         Label jugadorInvestigado = new Label("Jugador investigado: Jugador " + numeroInvestigado);
-        Label resultadoInvestigacion = new Label("Resutlado: " + resultado.getNombre());
+        Label resultadoInvestigacion = new Label("Resultado: " + resultado.getNombre());
 
         Button botonContinuar = new Button("CONTINUAR");
         botonContinuar.setOnAction(evento -> accionContinuar.run());

@@ -13,7 +13,6 @@ import juego.fase.FaseNocturna;
 import jugador.Jugador;
 import juego.Juego;
 import jugador.rol.bando.Bando;
-import jugador.rol.bando.BandoCiudadano;
 import mazo.FabricaMazo;
 import jugador.rol.Rol;
 import jugador.rol.roles.*;
@@ -314,12 +313,33 @@ public class EscenaJuego extends Scene {
     }
 
     private void mostrarTurnoMedicoOEjecutarNoche(){
+        Jugador medico = buscarMedicoVivo();
 
-        resolverNoche();
+        if(medico == null){
+            resolverNoche();
+            return;
+        }
 
+        PanelSeleccionProteccionMedico panelMedico = new PanelSeleccionProteccionMedico(
+                this.jugadores,
+                jugadorProtegido -> registrarProteccionMedico(medico, jugadorProtegido)
+        );
+        panel.setCenter(panelMedico);
     }
 
+    private void registrarProteccionMedico(Jugador medico, Jugador jugadorProtegido){
+        medico.accionNocturna(jugadorProtegido);
+        resolverNoche();
+    }
 
+    private Jugador buscarMedicoVivo(){
+        for (Jugador jugador : this.jugadores) {
+            if(jugador.estaVivo() && jugador.getNombreRol().equals("Medico")){
+                return jugador;
+            }
+        }
+        return null;
+    }
 
     private void resolverNoche(){
         this.faseNocturna.ejecutarFase();
