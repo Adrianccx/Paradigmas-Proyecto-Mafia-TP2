@@ -232,6 +232,16 @@ public class EscenaJuego extends Scene {
     }
 
     private void mostrarTableroJugadores(){
+
+        PanelEstadoPartida panelEstado = new PanelEstadoPartida(
+                this.estado,
+                this.jugadores,
+                this::mostrarFaseNocturna
+        );
+        panel.setCenter(panelEstado);
+    }
+
+    private void mostrarFaseNocturna(){
         panel.setCenter(this.cuadricula);
     }
 }
