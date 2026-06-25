@@ -28,11 +28,16 @@ public class FaseNocturna implements Fase {
 
     @Override
     public void ejecutarFase() {
-        if (elegidoPorMafia == null) return;
+        if (elegidoPorMafia == null) {
+            estado.finalizarNoche();
+            return;
+        }
+
         if (elegidoPorMafia.estaDesprotegido()) {
             estado.eliminarJugador(elegidoPorMafia);
         }
         elegidoPorMafia = null;
+        estado.finalizarNoche();
     }
 
 }

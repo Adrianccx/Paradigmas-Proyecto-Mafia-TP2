@@ -71,4 +71,10 @@ public class EstadoPartida {
         if (mafiososVivos >= ciudadanosVivos) return new BandoMafia();
         return null;
     }
+
+    public void finalizarNoche(){
+        for(Jugador jugador : jugadores){
+            jugador.quitarProteccion();
+        }
+    }
 }

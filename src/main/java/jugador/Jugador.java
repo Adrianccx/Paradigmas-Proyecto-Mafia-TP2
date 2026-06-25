@@ -32,6 +32,10 @@ public class Jugador {
         this.protegido = true;
     }
 
+    public void quitarProteccion(){
+        this.protegido = false;
+    }
+
     public Rol revelarRol(Jugador revelado) {
         if (!revelado.vivo || this == revelado) {
             return revelado.rol;
