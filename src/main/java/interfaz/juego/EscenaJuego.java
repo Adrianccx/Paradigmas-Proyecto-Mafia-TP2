@@ -9,6 +9,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import juego.EstadoPartida;
+import juego.fase.Fase;
+import juego.fase.FaseNocturna;
 import jugador.Jugador;
 import juego.Juego;
 import mazo.FabricaMazo;
@@ -23,6 +25,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Insets;
+import juego.fase.FaseNocturna;
 
 public class EscenaJuego extends Scene {
     private EstadoPartida estado;
@@ -35,6 +38,7 @@ public class EscenaJuego extends Scene {
     private CheckBox checkSheriff;
     private CheckBox checkPadrino;
     private Label detalleMazo;
+    private FaseNocturna faseNocturna;
 
     public EscenaJuego(Stage stage) {
         super(new Pane(), 800, 600);
@@ -242,6 +246,22 @@ public class EscenaJuego extends Scene {
     }
 
     private void mostrarFaseNocturna(){
-        panel.setCenter(this.cuadricula);
+
+        this.faseNocturna = new FaseNocturna(this.estado);
+
+        PanelSeleccionVictimaMafia panelSeleccion = new PanelSeleccionVictimaMafia(
+                "La mafia debe elegir una victima",
+                this.jugadores,
+                this::registrarVictimaMafia
+        );
+
+        panel.setCenter(panelSeleccion);
+    }
+
+    private void registrarVictimaMafia(Jugador victima){
+        this.faseNocturna.registrarVictimaMafia(victima);
+        this.faseNocturna.ejecutarFase();
+
+        mostrarTableroJugadores();
     }
 }
