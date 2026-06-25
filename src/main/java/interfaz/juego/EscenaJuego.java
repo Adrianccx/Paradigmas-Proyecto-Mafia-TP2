@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import juego.EstadoPartida;
-import juego.fase.Fase;
 import juego.fase.FaseNocturna;
 import jugador.Jugador;
 import juego.Juego;
@@ -25,7 +24,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Insets;
-import juego.fase.FaseNocturna;
 
 public class EscenaJuego extends Scene {
     private EstadoPartida estado;
@@ -262,6 +260,15 @@ public class EscenaJuego extends Scene {
         this.faseNocturna.registrarVictimaMafia(victima);
         this.faseNocturna.ejecutarFase();
 
-        mostrarTableroJugadores();
+        mostarResultadoNoche(victima);
+    }
+
+    private void mostarResultadoNoche(Jugador victima){
+        PanelResultadoNoche panelResultado = new PanelResultadoNoche(
+                victima,
+                this.jugadores,
+                this::mostrarTableroJugadores
+        );
+        panel.setCenter(panelResultado);
     }
 }
