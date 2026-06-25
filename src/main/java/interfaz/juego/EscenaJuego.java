@@ -12,6 +12,8 @@ import juego.EstadoPartida;
 import juego.fase.FaseNocturna;
 import jugador.Jugador;
 import juego.Juego;
+import jugador.rol.bando.Bando;
+import jugador.rol.bando.BandoCiudadano;
 import mazo.FabricaMazo;
 import jugador.rol.Rol;
 import jugador.rol.roles.*;
@@ -37,6 +39,7 @@ public class EscenaJuego extends Scene {
     private CheckBox checkPadrino;
     private Label detalleMazo;
     private FaseNocturna faseNocturna;
+    private Jugador victimaMafiaSeleccionada;
 
     public EscenaJuego(Stage stage) {
         super(new Pane(), 800, 600);
@@ -258,12 +261,12 @@ public class EscenaJuego extends Scene {
 
     private void registrarVictimaMafia(Jugador victima){
         this.faseNocturna.registrarVictimaMafia(victima);
-        this.faseNocturna.ejecutarFase();
+        this.victimaMafiaSeleccionada = victima;
 
-        mostarResultadoNoche(victima);
+        mostrarTurnoDetectiveOEjecutarSiguiente();
     }
 
-    private void mostarResultadoNoche(Jugador victima){
+    private void mostrarResultadoNoche(Jugador victima){
         PanelResultadoNoche panelResultado = new PanelResultadoNoche(
                 victima,
                 this.jugadores,
@@ -271,4 +274,56 @@ public class EscenaJuego extends Scene {
         );
         panel.setCenter(panelResultado);
     }
+
+    private void mostrarTurnoDetectiveOEjecutarSiguiente(){
+        Jugador detective = buscarDetectiveVivo();
+
+        if(detective == null){
+            mostrarTurnoMedicoOEjecutarNoche();
+            return;
+        }
+
+        PanelSeleccionInvestigacionDetective panelDetective = new PanelSeleccionInvestigacionDetective(
+                detective,
+                this.jugadores,
+                jugadorInvestigado -> registrarInvestigacionDetective(detective, jugadorInvestigado)
+        );
+        panel.setCenter(panelDetective);
+    }
+
+    private void registrarInvestigacionDetective(Jugador detective, Jugador investigado){
+        Bando resultado = detective.investigar(investigado);
+
+        PanelResultadoInvestigacion panelResultado = new PanelResultadoInvestigacion(
+                investigado,
+                resultado,
+                this.jugadores,
+                this::mostrarTurnoMedicoOEjecutarNoche
+        );
+
+        panel.setCenter(panelResultado);
+    }
+
+    private Jugador buscarDetectiveVivo(){
+        for(Jugador jugador : this.jugadores){
+            if(jugador.estaVivo() && jugador.getNombreRol().equals("Detective")){
+                return jugador;
+            }
+        }
+        return null;
+    }
+
+    private void mostrarTurnoMedicoOEjecutarNoche(){
+
+        resolverNoche();
+
+    }
+
+
+
+    private void resolverNoche(){
+        this.faseNocturna.ejecutarFase();
+        mostrarResultadoNoche(this.victimaMafiaSeleccionada);
+    }
+
 }

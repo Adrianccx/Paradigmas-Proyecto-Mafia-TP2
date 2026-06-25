@@ -2,6 +2,6 @@ package interfaz.juego;
 
 import jugador.Jugador;
 
-public interface AccionSeleccionVictima {
+public interface AccionSeleccionJugador {
     void seleccionar(Jugador jugador);
 }

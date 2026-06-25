@@ -6,7 +6,6 @@ import jugador.Jugador;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 
-import java.awt.*;
 import java.util.List;
 
 public class PanelSeleccionVictimaMafia extends VBox {
@@ -14,7 +13,7 @@ public class PanelSeleccionVictimaMafia extends VBox {
     public PanelSeleccionVictimaMafia(
             String titulo,
             List<Jugador> jugadores,
-            AccionSeleccionVictima accionSeleccionVictima
+            AccionSeleccionJugador accionSeleccionVictima
     ){
         Label tituloPrincipal = new Label("FASE NOCTURNA");
         Label subtitulo = new Label(titulo);
