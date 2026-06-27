@@ -269,7 +269,7 @@ public class EscenaJuego extends Scene {
         PanelResultadoNoche panelResultado = new PanelResultadoNoche(
                 victima,
                 this.jugadores,
-                this::mostrarTableroJugadores
+                this::mostrarFaseDiurna
         );
         panel.setCenter(panelResultado);
     }
@@ -344,6 +344,19 @@ public class EscenaJuego extends Scene {
     private void resolverNoche(){
         this.faseNocturna.ejecutarFase();
         mostrarResultadoNoche(this.victimaMafiaSeleccionada);
+    }
+
+    private void mostrarFaseDiurna(){
+        PanelFaseDiurna panelFaseDiurna = new PanelFaseDiurna(
+                this.jugadores,
+                this::mostrarNominaciones
+        );
+
+        panel.setCenter(panelFaseDiurna);
+    }
+
+    private void mostrarNominaciones(){
+        panel.setCenter(this.cuadricula);
     }
 
 }
