@@ -44,12 +44,10 @@ public class PanelResultadoNoche extends VBox {
 
         Label mensaje = new Label("Durante la noche fue eliminado:");
         Label jugadorEliminado = new Label("Jugador " + numeroVictima);
-        Label rolRevelado = new Label("Rol revelado: " +victima.getNombreRol());
 
         getChildren().addAll(
                 mensaje,
-                jugadorEliminado,
-                rolRevelado
+                jugadorEliminado
         );
     }
 }
