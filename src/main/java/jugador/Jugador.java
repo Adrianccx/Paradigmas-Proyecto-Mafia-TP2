@@ -1,5 +1,6 @@
 package jugador;
 
+import juego.fase.VotacionMafia;
 import jugador.rol.bando.Bando;
 import jugador.rol.Rol;
 
@@ -72,6 +73,42 @@ public class Jugador {
 
     public List<Jugador> obtenerEquipo(Collection<Jugador> jugadoresVivos) {
         return this.rol.obtenerEquipo(this, jugadoresVivos);
+    }
+
+    public boolean participaEnTurnoMafia(){
+        return this.estaVivo() && this.rol.participaEnTurnoMafia();
+    }
+
+    public boolean puedeInvestigarDeNoche(){
+        return this.estaVivo() && this.rol.puedeInvestigarDeNoche();
+    }
+
+    public boolean puedeProtegerDeNoche(){
+        return this.estaVivo() && this.rol.puedeProtegerDeNoche();
+    }
+
+    public void votarVictimaMafia(Jugador victima, VotacionMafia votacion) {
+        if (!this.vivo) {
+            throw new IllegalArgumentException("Un jugador eliminado no puede votar.");
+        }
+
+        this.rol.votarVictimaMafia(this, victima, votacion);
+    }
+
+    public void validarPuedeSerVictimaDeMafia() {
+        if (!this.vivo) {
+            throw new IllegalArgumentException("El jugador seleccionado ya esta eliminado");
+        }
+
+        this.rol.validarPuedeSerVictimaDeMafia();
+    }
+
+    public void recibirAtaqueNocturno() {
+        if (this.protegido) {
+            return;
+        }
+
+        this.eliminar();
     }
 
 }

@@ -1,43 +1,44 @@
 package juego.fase;
 
-import jugador.rol.bando.BandoMafia;
 import juego.EstadoPartida;
 import jugador.Jugador;
 
 public class FaseNocturna implements Fase {
     
     private EstadoPartida estado;
-    private Jugador elegidoPorMafia;
+    private Jugador victimaElegidaPorMafia;
+    private VotacionMafia votacionMafia;
 
     public FaseNocturna(EstadoPartida estado) {
         this.estado = estado;
+        this.votacionMafia = new VotacionMafia();
     }
 
     public void registrarVictimaMafia(Jugador victima) {
-        if (victima == null) {
-            throw new IllegalArgumentException("La víctima no puede ser nula.");
-        }
-        if (!victima.estaVivo()) {
-            throw new IllegalArgumentException("El jugador seleccionado ya esta eliminado");
-        }
-        if (victima.getBando().equals(new BandoMafia())) {
-            throw new IllegalArgumentException("La Mafia no puede atacarse a si misma");
-        }
-        elegidoPorMafia = victima;
+        victima.validarPuedeSerVictimaDeMafia();
+        this.victimaElegidaPorMafia = victima;
     }
+
+    public void registrarVotoMafia(Jugador mafioso, Jugador victima){
+        mafioso.votarVictimaMafia(victima, this.votacionMafia);
+    }
+
 
     @Override
     public void ejecutarFase() {
-        if (elegidoPorMafia == null) {
-            estado.finalizarNoche();
-            return;
+        if (this.victimaElegidaPorMafia == null) {
+            this.victimaElegidaPorMafia = this.votacionMafia.resolverVictima();
         }
 
-        if (elegidoPorMafia.estaDesprotegido()) {
-            estado.eliminarJugador(elegidoPorMafia);
+        if (this.victimaElegidaPorMafia != null) {
+            this.victimaElegidaPorMafia.recibirAtaqueNocturno();
         }
-        elegidoPorMafia = null;
-        estado.finalizarNoche();
+
+        this.votacionMafia.limpiar();
+        this.estado.finalizarNoche();
     }
 
+    public Jugador getVictimaElegidaPorMafia(){
+        return this.victimaElegidaPorMafia;
+    }
 }

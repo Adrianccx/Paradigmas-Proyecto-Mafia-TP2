@@ -8,4 +8,9 @@ public class Detective extends Rol {
     public Detective() {
         bando = new BandoCiudadano();
     }
+
+    @Override
+    public boolean puedeInvestigarDeNoche(){
+        return true;
+    }
 }

@@ -23,4 +23,9 @@ public class Medico extends Rol {
     public Medico() {
         bando = new BandoCiudadano();
     }
+
+    @Override
+    public boolean puedeProtegerDeNoche(){
+        return true;
+    }
 }

@@ -1,5 +1,6 @@
 package jugador.rol;
 
+import juego.fase.VotacionMafia;
 import jugador.rol.bando.Bando;
 import jugador.Jugador;
 
@@ -28,7 +29,26 @@ public abstract class Rol {
         this.bando = bando;
     }
 
+    public boolean participaEnTurnoMafia(){
+        return false;
+    }
+
+    public boolean puedeInvestigarDeNoche(){
+        return false;
+    }
+
+    public boolean puedeProtegerDeNoche(){
+        return false;
+    }
+
     public void accionNocturna(Jugador jugador) {}
+
+    public void votarVictimaMafia(Jugador votante, Jugador victima, VotacionMafia votacion){
+        throw new IllegalArgumentException("Este jugador no puede votar como mafia");
+    }
+
+    public void validarPuedeSerVictimaDeMafia(){
+    }
 
     public List<Jugador> obtenerEquipo(Jugador propio, Collection<Jugador> jugadoresVivos) {
         List<Jugador> resultado = new ArrayList<>();
