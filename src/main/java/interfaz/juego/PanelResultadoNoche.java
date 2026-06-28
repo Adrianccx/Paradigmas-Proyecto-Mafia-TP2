@@ -20,11 +20,14 @@ public class PanelResultadoNoche extends VBox {
 
         getChildren().add(titulo);
 
-        if (victima.estaVivo()){
+        if (victima == null) {
+            agregarResultadoSinEliminado();
+        } else if (victima.estaVivo()) {
             agregarResultadoSinEliminado();
         } else {
             agregarResultadoConEliminado(victima, jugadores);
         }
+
         Button botonContinuar = new Button("CONTINUAR");
         botonContinuar.setOnAction(evento -> accionContinuar.run());
 
