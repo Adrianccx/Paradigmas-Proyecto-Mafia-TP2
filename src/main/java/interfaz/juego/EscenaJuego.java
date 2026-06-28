@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Insets;
+import java.util.function.Predicate;
 
 public class EscenaJuego extends Scene {
     private EstadoPartida estado;
@@ -43,10 +44,9 @@ public class EscenaJuego extends Scene {
     private FaseNocturna faseNocturna;
     private Jugador victimaMafiaSeleccionada;
 
-    private enum TurnoNocturno {
-        MAFIA,
-        DETECTIVE,
-        MEDICO
+    @FunctionalInterface
+    private interface MostrarAccionNocturna{
+        void mostrar(int indiceJugador, Runnable continuar);
     }
 
     public EscenaJuego(Stage stage) {
@@ -274,89 +274,71 @@ public class EscenaJuego extends Scene {
     // Fase Nocturna general
     private void mostrarFaseNocturna(){
         this.faseNocturna = new FaseNocturna(this.estado);
-        mostrarTransicionNocturna(TurnoNocturno.MAFIA, 0);
+        mostrarTurnosMafia();
     }
 
-    private void mostrarTransicionNocturna(TurnoNocturno turno, int indiceJugador){
+    private void recorrerTurnoNocturno(
+            int indiceJugador,
+            Predicate<Jugador> puedeActuar,
+            MostrarAccionNocturna mostrarAccion,
+            Runnable alFinalizarTurno
+    ){
         if(indiceJugador >= jugadores.size()){
-            avanzarAlSiguienteTurnoNocturno(turno);
+            alFinalizarTurno.run();
             return;
         }
 
         Jugador jugador = jugadores.get(indiceJugador);
 
         if(!jugador.estaVivo()){
-            avanzarTurnoNocturno(turno, indiceJugador);
+            recorrerTurnoNocturno(
+                    indiceJugador + 1,
+                    puedeActuar,
+                    mostrarAccion,
+                    alFinalizarTurno
+            );
             return;
         }
 
         PanelTransicionPrivada panelTransicion = new PanelTransicionPrivada(
                 "Entregar el dispositivo al Jugador " + (indiceJugador + 1),
-                () -> mostrarTurnoNocturno(turno, indiceJugador)
+                () -> mostrarAccionSiCorresponde(
+                        indiceJugador,
+                        puedeActuar,
+                        mostrarAccion,
+                        alFinalizarTurno
+                )
         );
-
         panel.setCenter(panelTransicion);
     }
 
-    private void mostrarTurnoNocturno(TurnoNocturno turno, int indiceJugador){
+    private void mostrarAccionSiCorresponde(
+            int indiceJugador,
+            Predicate<Jugador> puedeActuar,
+            MostrarAccionNocturna mostrarAccion,
+            Runnable alFinalizarTurno
+    ){
         Jugador jugador = jugadores.get(indiceJugador);
 
-        if(!jugador.estaVivo()){
-            avanzarTurnoNocturno(turno, indiceJugador);
+        Runnable continuar = () -> recorrerTurnoNocturno(
+                indiceJugador + 1,
+                puedeActuar,
+                mostrarAccion,
+                alFinalizarTurno
+        );
+
+        if(!puedeActuar.test(jugador)){
+            mostrarTurnoSinAccionNocturna(continuar);
             return;
         }
 
-        if(turno == TurnoNocturno.MAFIA && jugador.getBando().equals(new BandoMafia())){
-            mostrarTurnoMafia(indiceJugador);
-            return;
-        }
-        if(turno == TurnoNocturno.DETECTIVE && jugador.getNombreRol().equals("Detective")){
-            mostrarTurnoDetective(jugador);
-            return;
-        }
-        if(turno == TurnoNocturno.MEDICO && jugador.getNombreRol().equals("Medico")){
-            mostrarTurnoMedico(jugador);
-            return;
-        }
-
-        mostrarTurnoSinAccionNocturna(turno, indiceJugador);
+        mostrarAccion.mostrar(indiceJugador, continuar);
     }
 
-    private void avanzarTurnoNocturno(TurnoNocturno turno, int indiceJugadorActual){
-        int siguienteIndice = indiceJugadorActual + 1;
-
-        while(siguienteIndice < jugadores.size() && !jugadores.get(siguienteIndice).estaVivo()){
-            siguienteIndice++;
-
-        }
-        if(siguienteIndice < jugadores.size()){
-            mostrarTransicionNocturna(turno, siguienteIndice);
-            return;
-        }
-
-        avanzarAlSiguienteTurnoNocturno(turno);
-    }
-
-    private void avanzarAlSiguienteTurnoNocturno(TurnoNocturno turno){
-        if(turno == TurnoNocturno.MAFIA){
-            mostrarTransicionNocturna(TurnoNocturno.DETECTIVE, 0);
-            return;
-        }
-
-        if(turno == TurnoNocturno.DETECTIVE){
-            mostrarTransicionNocturna(TurnoNocturno.MEDICO, 0);
-        }
-
-        if(turno == TurnoNocturno.MEDICO){
-            resolverNoche();
-        }
-
-    }
-
-    private void mostrarTurnoSinAccionNocturna(TurnoNocturno turno, int indiceJugador){
+    private void mostrarTurnoSinAccionNocturna(Runnable continuar){
         PanelTransicionPrivada panelTransicion = new PanelTransicionPrivada(
                 "No tenes accion en este turno",
-                () -> avanzarTurnoNocturno(turno, indiceJugador)
+                continuar
         );
 
         panel.setCenter(panelTransicion);
@@ -364,44 +346,66 @@ public class EscenaJuego extends Scene {
 
     //------------------------------------------------------------------------------------------------------------------
     // Mafia
-    private void mostrarTurnoMafia(int indiceJugador){
+    private void mostrarTurnosMafia(){
+        recorrerTurnoNocturno(
+                0,
+                Jugador::participaEnTurnoMafia,
+                this::mostrarTurnoMafia,
+                this::mostrarTurnosDetective
+        );
+    }
+    private void mostrarTurnoMafia(int indiceJugador, Runnable continuar){
         PanelSeleccionVictimaMafia panelSeleccion = new PanelSeleccionVictimaMafia(
                 "La mafia debe elegir una victima",
                 this.jugadores,
-                victima -> registrarVictimaMafia(victima)
+                victima -> registrarVotoMafia(indiceJugador, victima, continuar)
         );
 
         panel.setCenter(panelSeleccion);
     }
 
-    private void registrarVictimaMafia(Jugador victima){
-        this.faseNocturna.registrarVictimaMafia(victima);
-        this.victimaMafiaSeleccionada = victima;
+    private void registrarVotoMafia(int indiceJugador, Jugador victima, Runnable continuar){
+        Jugador mafioso = jugadores.get(indiceJugador);
 
-       mostrarTransicionNocturna(TurnoNocturno.DETECTIVE, 0);
+        this.faseNocturna.registrarVotoMafia(mafioso, victima);
+
+        continuar.run();
     }
 
     //------------------------------------------------------------------------------------------------------------------
     // Detective
-    private void mostrarTurnoDetective(Jugador detective) {
-        PanelSeleccionInvestigacionDetective panelDetective =
-                new PanelSeleccionInvestigacionDetective(
-                        detective,
-                        this.jugadores,
-                        jugadorInvestigado -> registrarInvestigacionDetective(detective, jugadorInvestigado)
-                );
+    private void mostrarTurnosDetective(){
+        recorrerTurnoNocturno(
+                0,
+                Jugador::puedeInvestigarDeNoche,
+                this::mostrarTurnoDetective,
+                this::mostrarTurnosMedico
+        );
+    }
 
+    private void mostrarTurnoDetective(int indiceJugador, Runnable continuar){
+        Jugador detective = jugadores.get(indiceJugador);
+
+        PanelSeleccionInvestigacionDetective panelDetective = new PanelSeleccionInvestigacionDetective(
+                detective,
+                this.jugadores,
+                jugadorInvestigado -> registrarInvestigacionDetective(
+                        detective,
+                        jugadorInvestigado,
+                        continuar
+                )
+        );
         panel.setCenter(panelDetective);
     }
 
-    private void registrarInvestigacionDetective(Jugador detective, Jugador investigado){
+    private void registrarInvestigacionDetective(Jugador detective, Jugador investigado, Runnable continuar){
         Bando resultado = detective.investigar(investigado);
 
         PanelResultadoInvestigacion panelResultado = new PanelResultadoInvestigacion(
                 investigado,
                 resultado,
                 this.jugadores,
-                () -> mostrarTransicionNocturna(TurnoNocturno.MEDICO, 0)
+                continuar
         );
 
         panel.setCenter(panelResultado);
@@ -409,24 +413,37 @@ public class EscenaJuego extends Scene {
 
     //------------------------------------------------------------------------------------------------------------------
     // Medico
-    private void mostrarTurnoMedico(Jugador medico){
+    private void mostrarTurnosMedico(){
+        recorrerTurnoNocturno(
+                0,
+                Jugador::puedeProtegerDeNoche,
+                this::mostrarTurnoMedico,
+                this::resolverNoche
+        );
+    }
+
+    private void mostrarTurnoMedico(int indiceJugador, Runnable continuar){
+        Jugador medico = jugadores.get(indiceJugador);
+
         PanelSeleccionProteccionMedico panelMedico = new PanelSeleccionProteccionMedico(
                 this.jugadores,
-                jugadorProtegido -> registrarProteccionMedico(medico, jugadorProtegido)
+                jugadorProtegido -> registrarProteccionMedico(medico, jugadorProtegido, continuar)
         );
 
         panel.setCenter(panelMedico);
     }
 
-    private void registrarProteccionMedico(Jugador medico, Jugador jugadorProtegido){
+    private void registrarProteccionMedico(Jugador medico, Jugador jugadorProtegido, Runnable continuar){
         medico.accionNocturna(jugadorProtegido);
-        resolverNoche();
+        continuar.run();
     }
 
     //------------------------------------------------------------------------------------------------------------------
     // Resolucion Nocturna
     private void resolverNoche(){
         this.faseNocturna.ejecutarFase();
+        this.victimaMafiaSeleccionada = this.faseNocturna.getVictimaElegidaPorMafia();
+
         mostrarResultadoNoche(this.victimaMafiaSeleccionada);
     }
 
