@@ -60,15 +60,21 @@ public class EstadoPartida {
         int ciudadanosVivos = 0;
 
         for (Jugador j : jugadores) {
-            if (j.getBando() == new BandoMafia()) {
-                mafiososVivos++;
-            } else {
-                ciudadanosVivos++;
+            if (j.estaVivo()) {
+                if (j.getBando().equals(new BandoMafia())) {
+                    mafiososVivos++;
+                } else {
+                    ciudadanosVivos++;
+                }
             }
         }
+        if (mafiososVivos == 0) {
+            return new BandoCiudadano();
+        }
+        if (mafiososVivos >= ciudadanosVivos) {
+            return new BandoMafia();
+        }
 
-        if (mafiososVivos == 0) return new BandoCiudadano();
-        if (mafiososVivos >= ciudadanosVivos) return new BandoMafia();
         return null;
     }
 

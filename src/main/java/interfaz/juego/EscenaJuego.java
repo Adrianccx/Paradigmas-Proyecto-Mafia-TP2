@@ -458,17 +458,106 @@ public class EscenaJuego extends Scene {
 
     //------------------------------------------------------------------------------------------------------------------
     // Fase Diurna
-    private void mostrarFaseDiurna(){
-        PanelFaseDiurna panelFaseDiurna = new PanelFaseDiurna(
-                this.jugadores,
-                this::mostrarNominaciones
-        );
+    private juego.fase.FaseDiurna faseDiurnaModelo;
+    private void mostrarFaseDiurna() {
+        this.faseDiurnaModelo = new juego.fase.FaseDiurna(this.estado);
 
-        panel.setCenter(panelFaseDiurna);
+
+        PanelDebate panelDebate = new PanelDebate(this::mostrarNominaciones);
+        panel.setCenter(panelDebate);
     }
 
-    private void mostrarNominaciones(){
-        panel.setCenter(this.cuadricula);
+    private void mostrarNominaciones() {
+        PanelNominacion panelNominacion = new PanelNominacion(
+                this.jugadores,
+                this.faseDiurnaModelo,
+                this::iniciarVotacionDiurna
+        );
+        panel.setCenter(panelNominacion);
+    }
+
+    private void iniciarVotacionDiurna() {
+        recorrerVotacionDiurna(0);
+    }
+
+    private void recorrerVotacionDiurna(int indiceJugador) {
+        if (indiceJugador >= jugadores.size()) {
+            resolverFaseDiurna();
+            return;
+        }
+
+        Jugador jugador = jugadores.get(indiceJugador);
+
+        if (!jugador.estaVivo()) {
+            recorrerVotacionDiurna(indiceJugador + 1);
+            return;
+        }
+
+        PanelTransicionPrivada panelTransicion = new PanelTransicionPrivada(
+                "Entregar el turno al Jugador " + (indiceJugador + 1) + " para votar.",
+                () -> mostrarPantallaVoto(indiceJugador, jugador)
+        );
+        panel.setCenter(panelTransicion);
+    }
+
+    private void mostrarPantallaVoto(int indiceJugador, Jugador votante) {
+        PanelVotacionDiurna panelVoto = new PanelVotacionDiurna(
+                indiceJugador + 1,
+                this.faseDiurnaModelo.getNominados(),
+                this.jugadores,
+                () -> {
+                    this.faseDiurnaModelo.abstenerse();
+                    recorrerVotacionDiurna(indiceJugador + 1);
+                },
+                nominado -> {
+                    this.faseDiurnaModelo.votar(nominado);
+                    recorrerVotacionDiurna(indiceJugador + 1);
+                }
+        );
+        panel.setCenter(panelVoto);
+    }
+
+    private void resolverFaseDiurna() {
+        this.faseDiurnaModelo.ejecutarFase();
+
+        if (this.estado.verificarGanador() != null) {
+            mostrarPantallaVictoria();
+            return;
+        }
+        if (!this.faseDiurnaModelo.getNominados().isEmpty()) {
+            PanelTransicionPrivada transicion = new PanelTransicionPrivada(
+                    "Hubo un empate se realizará una segunda vuelta",
+                    this::iniciarVotacionDiurna
+            );
+            panel.setCenter(transicion);
+        } else {
+            PanelResultadoDiurno panelResultado = new PanelResultadoDiurno(
+                    this.faseDiurnaModelo.getJugadorEliminado(),
+                    this.jugadores,
+                    this::mostrarFaseNocturna
+            );
+            panel.setCenter(panelResultado);
+        }
+    }
+
+    private void mostrarPantallaVictoria() {
+        VBox panelVictoria = new VBox(20);
+        panelVictoria.setAlignment(Pos.CENTER);
+
+        Label titulo = new Label("FIN DE LA PARTIDA");
+        titulo.setStyle("-fx-font-size: 36px; -fx-font-weight: bold;");
+
+        Label ganador = new Label("Ganador: " + this.estado.verificarGanador().getNombre().toUpperCase());
+        ganador.setStyle("-fx-font-size: 24px; -fx-text-fill: green;");
+
+        Button botonSalir = new Button("VOLVER AL MENU PRINCIPAL");
+        botonSalir.setOnAction(e -> {
+            Stage stage = (Stage) panel.getScene().getWindow();
+            stage.setScene(new MenuPrincipal(stage));
+        });
+
+        panelVictoria.getChildren().addAll(titulo, ganador, botonSalir);
+        panel.setCenter(panelVictoria);
     }
 
 }
